@@ -6,7 +6,6 @@
   margin-top: 67px;
   padding-bottom: 60px;
   /* position: relative; */
-  overflow: hidden;
 }
 
 .footer__copyright {
@@ -37,7 +36,6 @@
     /* padding-left: 19px; */
     padding-top: 48px;
     padding-bottom: 36px;
-    overflow: hidden;
     /* width: 100%;*/
     position: relative;
     margin-top: 0;
@@ -47,7 +45,6 @@
     line-height: 16.94px;
     /* flex-shrink: 0; 
     margin-top: 0;  */
-    overflow: hidden;
     margin-left: 0;
     margin-right: 0;
   }
