@@ -20,5 +20,3 @@ The way you'll do this at work is by exporting images directly from Figma — we
 
 Link to Github:
 https://minhthu1902.github.io/se_project_aroundtheus
-# se_project_aroundtheus
-# se_project_aroundtheus
