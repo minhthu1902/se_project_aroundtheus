@@ -16,7 +16,7 @@
   line-height: 21.78px;
   color: #545454;
   /* margin: 48px 16px 38px 0px; */
-  margin: 0 auto;
+  margin: 0;
 }
 @media screen and (max-width: 900px) {
   .footer {
