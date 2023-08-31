@@ -1,0 +1,121 @@
+.modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+  display: flex;
+  padding: 0 19px;
+  visibility: hidden;
+  right: 0;
+}
+
+.modal__container {
+  position: relative;
+  background-color: white;
+  margin: auto;
+  padding: 36px;
+  border-radius: 10px;
+  width: 358px;
+}
+
+.modal__heading {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000;
+  margin: 0 0 24px;
+}
+
+.modal__opened {
+  visibility: visible;
+  display: flex;
+  pointer-events: all;
+}
+.modal__close {
+  padding: 0 19px;
+  background-image: url("../images/Close\ Icon.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  position: absolute;
+  cursor: pointer;
+  bottom: calc(100% + 5px);
+  left: calc(100% + 5px);
+}
+
+.modal__close:hover {
+  opacity: 0.8;
+  transition: 0.3s;
+}
+.modal__form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 17px;
+  row-gap: 8px;
+}
+
+.modal__input {
+  height: 50px;
+  width: 100%;
+  background-color: transparent;
+  color: #000;
+  border: none;
+  display: flex;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-bottom-style: solid;
+  border-radius: 2px;
+  font-family: "Inter", Arial, "Time New Roman";
+  font-size: 14px;
+  font-weight: 400px;
+  line-height: 17px;
+  text-align: left;
+}
+
+.modal__button {
+  height: 50px;
+  width: 100%;
+  margin-bottom: 36px;
+  margin-top: 48px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  font-family: "Inter", Arial, "Time New Roman";
+  font-size: 18px;
+  line-height: 22px;
+  cursor: pointer;
+}
+
+.modal__button:hover {
+  opacity: 0;
+  transition: 0.3s;
+}
+
+@media screen and (max-width: 800px) {
+  .modal__container {
+    width: 282px;
+    height: 322px;
+    top: 123px;
+    border: 1px;
+  }
+
+  .modal__close {
+    width: 26px;
+    height: 26px;
+    bottom: calc(100% + 14px);
+    left: calc(100% - 25px);
+  }
+}
