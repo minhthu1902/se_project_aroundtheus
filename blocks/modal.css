@@ -30,9 +30,8 @@
   margin: 0 0 24px;
 }
 
-.modal__opened {
+.modal__open {
   visibility: visible;
-  display: flex;
   pointer-events: all;
 }
 .modal__close {
@@ -52,7 +51,7 @@
 
 .modal__close:hover {
   opacity: 0.8;
-  transition: 0.3s;
+  transition: 0.2s;
 }
 .modal__form {
   display: flex;

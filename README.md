@@ -1,11 +1,5 @@
 # Project 3: Around The U.S.
 
-### Overview
-
-- Intro
-- Figma
-- Images
-
 **Intro**
 
 This project is made using tool such as Figma, tinypng.com and Visual Code to link to Github and create a respoinsive website which displays pictures of sight seeing places and corresponding size for desktop, mobile phone.
@@ -18,5 +12,12 @@ This project is made using tool such as Figma, tinypng.com and Visual Code to li
 
 The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster.
 
-Link to Github:
-https://minhthu1902.github.io/se_project_aroundtheus
+\*\* Skills that was used in this project:
+
+1. HTML CSS and JavaScript
+2. BEM, Flexbox.
+3. DOM
+4. Responsive Layout
+
+   Link to Github:
+   https://minhthu1902.github.io/se_project_aroundtheus
