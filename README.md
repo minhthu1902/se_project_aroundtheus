@@ -18,6 +18,7 @@ The way you'll do this at work is by exporting images directly from Figma — we
 2. BEM, Flexbox.
 3. DOM
 4. Responsive Layout
+5. JavaScript using DOM and functions to render the card and display edit profile to edit name and description on webpage.
 
    Link to Github:
    https://minhthu1902.github.io/se_project_aroundtheus
