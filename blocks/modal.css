@@ -79,7 +79,6 @@
 .modal__button {
   display: flex;
   height: 50px;
-  width: 358px;
   margin-top: 18px;
   background-color: #000;
   border: none;
@@ -141,5 +140,10 @@
   }
   .modal__form-input {
     padding-bottom: 9px;
+  }
+  .modal__button {
+    margin: 0;
+    width: 100%;
+    height: 46px;
   }
 }
