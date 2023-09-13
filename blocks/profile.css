@@ -55,6 +55,7 @@
 
 .profile__add-button {
   background: transparent url(../images/add.svg) center no-repeat;
+  background-size: 22px;
   width: 150px;
   height: 50px;
   margin-left: auto;
