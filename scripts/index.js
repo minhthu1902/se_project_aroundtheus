@@ -33,12 +33,17 @@ const initialCards = [
     alt: "Lago di Braies",
   },
 ];
-console.log(initialCards);
-/* Element */
+// console.log(initialCards);
 
-const profileEditButton = document.querySelector("#profile-edit-button");
+// TEMPLATE
+const cardsListEl = document.querySelector(".cards__list");
+const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
+
+// PROFILE EDIT BUTTON and DOM
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileCloseModal = document.querySelector("#modal-close-button");
+const profileEditButton = document.querySelector(".profile__edit-button");
+const profileCloseModal = profileEditModal.querySelector(".modal__close");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
@@ -46,47 +51,131 @@ const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
 const profileEditForm = profileEditModal.querySelector(".modal__form");
-const cardListEl = document.querySelector(".cards__list");
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
 
-// Functions
-function closePopUp() {
-  profileEditModal.classList.remove("modal_opened");
+// ADD CARD button
+const addCardModal = document.querySelector("#add-card-modal");
+
+const addNewCardButton = document.querySelector(".profile__add-button");
+const cardTitleInput = addCardEditForm.querySelector(
+  ".modal__input_type_title"
+);
+const addCardEditForm = addCardModal.querySelector(".modal__form");
+const cardUrlInput = addCardEditForm.querySelector(".modal__input_type_url");
+const addCardModalCloseButton = addCardModal.querySelector(".modal__close");
+
+//IMAGE PREVIEW and DOM
+const previewImageModal = document.querySelector("#preview-image-modal");
+const previewImage = previewImageModal.querySelector(".modal__preview-image");
+const previewImageTitle = previewImageModal.querySelector(
+  ".modal__preview-title"
+);
+const previewImageModalCloseButton = document.querySelector(
+  "#preview-modal-close-button"
+);
+
+// FUNCTIONS
+function closePopUp(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", escPopup);
 }
-
-function openPopUp() {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  profileEditModal.classList.add("modal_opened");
+function openPopUp(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", escPopup);
 }
 
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTextEl = cardElement.querySelector(".card__text");
-  cardImageEl.setAttribute("src", cardData.link);
-  cardImageEl.setAttribute("alt", cardData.name);
-  cardTextEl.textContent = cardData.name;
+  const cardImage = cardElement.querySelector(".card__image");
+  const cardTitle = cardElement.querySelector(".card__title");
+
+  //like btn
+  const likeButton = cardElement.querySelector(".card__like-button");
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button-active");
+  });
+
+  //card delete btn
+  const deleteButton = cardElement.querySelector("card__delete-button");
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
+  cardTitle.textContent = cardData.name;
+
+  //Image modal
+  cardImage.addEventListener("click", function () {
+    previewImage.src = cardData.link;
+    previewImage.alt = cardData.name;
+    previewImageModalTitle.textContent = cardData.name;
+    openPopUp(previewImageModal);
+  });
+
   return cardElement;
 }
-// Event handler
+function renderCard(cardData, cardsListEl) {
+  const cardElement = getCardElement(cardData);
+  cardsListEl.prepend(cardElement);
+}
+
+//Render content for each card
+initialCards.forEach((cardData) => renderCard(cardData, cardsListEl));
+
+// PROFILE EDIT BUTTON Eventlistener and Function
+
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopUp();
+  closePopUp(profileEditModal);
 }
 
-// Eventlistener
+profileEditButton.addEventListener("click", () => {
+  profileTitleInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
+  openPopUp(profileEditModal);
+});
 
-profileEditButton.addEventListener("click", openPopUp);
-
-profileCloseModal.addEventListener("click", closePopUp);
+profileCloseModal.addEventListener("click", () => {
+  closePopUp(profileEditModal);
+});
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  cardListEl.append(cardElement);
+// ADD BUTTON eventlistener and function
+function handleAddCardFormSubmit(e) {
+  e.preventDefault();
+  const name = cardTitleInput.value;
+  const link = cardUrlInput.value;
+  renderCard({ name, link }, cardsListEl);
+  closePopUp(addCardModal);
+  addCardEditForm.reset();
+}
+
+addNewCardButton.addEventListener("click", () => {
+  openPopUp(addCardModal);
 });
+
+addCardModalCloseButton.addEventListener("click", () => {
+  closePopUp(addCardModal);
+});
+addCardEditForm.addEventListener("submit", handleAddCardFormSubmit);
+
+initialCards.forEach((cardData) => renderCard(cardData, cardsListEl));
+
+// IMAGE PREVIEW
+// imagePreviewModalCloseButton.addEventListener("click", () =>
+//   closePopUp(imagePreviewModal)
+// );
+
+// [profileEditModal, addCardModal, imagePreviewModal].forEach((modal) => {
+//   modal.addEventListener("mousedown", (e) => {
+//     if (
+//       e.target.classList.contains("modal") ||
+//       e.target.classList.contains("modal__close")
+//     ) {
+//       closePopUp(modal);
+//     }
+//   });
+// });

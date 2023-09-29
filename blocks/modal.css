@@ -19,12 +19,13 @@
   opacity: 1;
   transition: 0.2s linear;
 }
-.modal__container {
+.modal__content {
   position: relative;
   background-color: white;
   margin: auto;
   /* width: 358px; */
-  /* box-sizing: border-box; */
+  /* box-sizing: border-box;
+  width: 100%; */
   border-radius: 10px;
   /* box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15); */
   padding: 34px 36px 37px 36px;
@@ -71,7 +72,7 @@
   /* margin: auto; */
 }
 
-.modal__form-input {
+/* .modal__form-input {
   border: 1px solid transparent;
   border-bottom: 1px rgba(0, 0, 0, 0.2);
   font-family: "Inter", sans-serif;
@@ -81,7 +82,7 @@
   text-align: left;
   margin-top: 30px;
   padding-bottom: 13px;
-}
+} */
 
 .modal__button {
   display: flex;
@@ -97,7 +98,6 @@
 .modal__button:hover {
   opacity: 0.8;
   cursor: pointer;
-  background-color: #000;
 }
 .modal__button-text {
   font-family: "Inter", sans-serif;
@@ -122,17 +122,42 @@
   border-left: none;
   border-right: none;
 }
-
+.modal__content_preview {
+  width: 240px;
+  height: 299px;
+  padding: 0;
+}
+.modal__image {
+  width: 240px;
+  height: 299px;
+}
+.modal__title {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.52px;
+  width: 291px;
+  height: 12px;
+}
+modal__close_preview {
+  height: 40px;
+  width: 40px;
+}
+modal__close_preview:hover {
+  opacity: 0.8;
+}
 @media screen and (max-width: 450px) {
   .modal {
     width: 282px;
     /* height: 322px; */
   }
-  .modal__container {
+  .modal__content {
     max-width: 282px;
     /* max-height: 322px; */
     padding: 25px 22px 25px 22px;
     border: 1px;
+    width: 100%;
+    max-width: calc(100% - 19px * 2);
   }
 
   .modal__close {
@@ -150,8 +175,24 @@
     padding-bottom: 9px;
   }
   .modal__button {
-    max-width: 238px;
+    width: 238px;
     height: 46px;
-    margin-top: 15px;
+    flex-shrink: 0;
+    /* margin-top: 15px; */
+  }
+  .modal__content_preview {
+    width: 433px;
+    height: 540px;
+    padding: 0;
+  }
+  .modal__image {
+    width: 433px;
+    height: 540px;
+  }
+  .modal__close_preview {
+    width: 40px;
+    height: 40px;
+    left: calc(100% + 5px);
+    bottom: calc(100% + 5px);
   }
 }

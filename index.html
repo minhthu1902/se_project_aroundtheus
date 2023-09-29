@@ -36,7 +36,11 @@
             ></button>
             <p class="profile__description">Explorer</p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button
+            class="profile__add-button"
+            id="profile-add-button"
+            type="button"
+          ></button>
         </section>
 
         <section class="cards page__section">
@@ -48,7 +52,7 @@
                 alt="Yosemite Valley"
               />
               <div class="card__description">
-                <h2 class="card__text">Yosemite Valley</h2>
+                <h2 class="card__title">Yosemite Valley</h2>
                 <button class="card__like-button" type="button"></button>
               </div>
             </li>
@@ -59,7 +63,7 @@
                 alt="Lake Louise"
               />
               <div class="card__description">
-                <h2 class="card__text">Lake Louise</h2>
+                <h2 class="card__title">Lake Louise</h2>
                 <button class="card__like-button" type="button"></button>
               </div>
             </li>
@@ -70,7 +74,7 @@
                 alt="Bald Mountain"
               />
               <div class="card__description">
-                <h2 class="card__text">Bald Mountains</h2>
+                <h2 class="card__title">Bald Mountains</h2>
                 <button class="card__like-button" type="button"></button>
               </div>
             </li>
@@ -81,7 +85,7 @@
                 alt="Latemar"
               />
               <div class="card__description">
-                <h2 class="card__text">Latemar</h2>
+                <h2 class="card__title">Latemar</h2>
                 <button class="card__like-button" type="button"></button>
               </div>
             </li>
@@ -92,7 +96,7 @@
                 alt="Vanoise National Park"
               />
               <div class="card__description">
-                <h2 class="card__text">Vanoise National Park</h2>
+                <h2 class="card__title">Vanoise National Park</h2>
                 <button class="card__like-button" type="button"></button>
               </div>
             </li>
@@ -103,7 +107,7 @@
                 alt="Lago di Braies"
               />
               <div class="card__description">
-                <h2 class="card__text">Lago di Braies</h2>
+                <h2 class="card__title">Lago di Braies</h2>
                 <button class="card__like-button" type="button"></button>
               </div>
             </li> -->
@@ -115,26 +119,27 @@
       </footer>
     </div>
 
+    <!-- Edit profile modal -->
     <div class="modal" id="profile-edit-modal">
-      <div class="modal__container">
+      <div class="modal__content">
         <button
           class="modal__close"
           type="button"
           id="modal-close-button"
         ></button>
         <h3 class="modal__heading">Edit Profile</h3>
-        <form class="modal__form" name="modal__form">
+        <form class="modal__form" id="edit-profile-form">
           <input
             type="text"
             name="title"
-            class="modal__input"
+            class="modal__input modal__input_type_name"
             id="profile-title-input"
             placeholder="Name"
           />
           <input
             type="text"
             name="description"
-            class="modal__input"
+            class="modal__input modal__input_type_description"
             id="profile-description-input"
             placeholder="Profile Description"
           />
@@ -145,16 +150,64 @@
       </div>
     </div>
     <!-- Add card modal -->
+    <div class="modal" id="add-card-modal">
+      <div class="modal__content">
+        <button
+          class="modal__close"
+          type="button"
+          id="modal-close-button"
+        ></button>
+        <h2 class="modal__heading">New Place</h2>
+        <form class="modal__form" id="add-card-form">
+          <input
+            type="text"
+            name="title"
+            required
+            minlength="1"
+            maxlength="30"
+            class="modal__input modal__input_type_title"
+            id="card-title-input"
+            placeholder="Title"
+          />
+          <input
+            type="text"
+            name="url"
+            class="modal__input modal__input_type_url"
+            id="card-description-input"
+            placeholder="Image URL"
+          />
+          <button class="modal__button" type="submit">
+            <span class="modal__button-text">Save</span>
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- Image Preview Modal -->
+    <div class="modal" id="preview-image-modal">
+      <div class="modal__content-preview">
+        <button
+          class="modal__close"
+          id="preview-modal-close-button"
+          type="button"
+        ></button>
+
+        <img src="#" alt="alt" class="modal__preview-image" />
+        <h2 class="modal__preview-title"></h2>
+      </div>
+    </div>
+    <!-- template card -->
     <template id="card-template">
       <!--shortcut template#card-template-->
       <li class="card">
-        <img src="" class="card__image" alt="" />
+        <img src="#" class="card__image" alt="#" />
+        <button class="card__delete-button" type="button"></button>
         <div class="card__description">
-          <h2 class="card__text"></h2>
+          <h2 class="card__title"></h2>
           <button class="card__like-button" type="button"></button>
         </div>
       </li>
     </template>
-    <script src="./scripts/index.js" defer></script>
+
+    <script defer src="./scripts/index.js"></script>
   </body>
 </html>
