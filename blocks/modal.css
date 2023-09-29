@@ -122,16 +122,16 @@
   border-left: none;
   border-right: none;
 }
-.modal__content_preview {
+.modal__content-preview {
   width: 240px;
   height: 299px;
   padding: 0;
 }
-.modal__image {
+.modal__preview-image {
   width: 240px;
   height: 299px;
 }
-.modal__title {
+.modal__preview-title {
   font-family: "Inter", Arial, sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -139,13 +139,7 @@
   width: 291px;
   height: 12px;
 }
-modal__close_preview {
-  height: 40px;
-  width: 40px;
-}
-modal__close_preview:hover {
-  opacity: 0.8;
-}
+
 @media screen and (max-width: 450px) {
   .modal {
     width: 282px;

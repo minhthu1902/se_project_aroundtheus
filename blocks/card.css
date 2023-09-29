@@ -43,10 +43,23 @@
   margin: 0;
 }
 .card__like-button-active {
-  background-image: url(../images/blackheart.svg) center no-repeat;
+  background-image: url(../images/blackheart.svg);
 }
 .card__like-button:hover {
   opacity: 50%;
   cursor: pointer;
   transition: 0.4s;
+}
+.card__delete-button {
+  background-image: transparent url(../images/Deletebutton.svg) no-repeat;
+  position: absolute;
+  width: 18px;
+  height: 19px;
+  top: 18px;
+  left: 249px;
+  border: none;
+}
+.card__delete-button:hover {
+  cursor: pointer;
+  opacity: 0.5;
 }
