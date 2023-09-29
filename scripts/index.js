@@ -75,11 +75,9 @@ const previewImageModalCloseButton = document.querySelector(
 // FUNCTIONS
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", escPopup);
 }
 function openPopUp(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", escPopup);
 }
 
 function getCardElement(cardData) {
