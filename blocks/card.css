@@ -51,7 +51,7 @@
   transition: 0.4s;
 }
 .card__delete-button {
-  background-image: transparent url(../images/Deletebutton.svg) no-repeat;
+  background-image: url(../images/Trash.svg) no-repeat;
   position: absolute;
   width: 18px;
   height: 19px;
