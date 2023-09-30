@@ -52,7 +52,7 @@
   transition: opacity 0.1s ease;
 }
 .card__delete-button {
-  background-image: transparent url(../images/delete-icon.svg);
+  background: url(../images/delete-icon.svg) transparent;
   position: absolute;
   width: 18px;
   height: 19px;
