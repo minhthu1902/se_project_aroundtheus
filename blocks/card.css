@@ -4,6 +4,7 @@
   border-radius: 10px;
   overflow: hidden;
   list-style: none;
+  position: relative; /*to prevent delete button not stacking on each other */
 }
 
 .card__image {
@@ -48,17 +49,16 @@
 .card__like-button:hover {
   opacity: 50%;
   cursor: pointer;
-  transition: 0.4s;
+  transition: opacity 0.1s ease;
 }
 .card__delete-button {
-  background-image: url(../images/Trash.svg) no-repeat;
+  background-image: transparent url(../images/delete-icon.svg);
   position: absolute;
   width: 18px;
   height: 19px;
   top: 18px;
-  left: 249px;
+  right: 15px;
   border: none;
-  color: #fff;
 }
 .card__delete-button:hover {
   cursor: pointer;
