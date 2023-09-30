@@ -16,7 +16,7 @@
   /* display: flex; */
   visibility: visible;
   opacity: 1;
-  transition: 0.2s linear;
+  transition: visibility 0s, opacity 0.6s;
 }
 .modal__content {
   position: relative;

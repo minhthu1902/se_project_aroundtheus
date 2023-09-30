@@ -58,8 +58,10 @@
   top: 18px;
   left: 249px;
   border: none;
+  color: #fff;
 }
 .card__delete-button:hover {
   cursor: pointer;
   opacity: 0.5;
+  transition: opacity 1s ease;
 }
