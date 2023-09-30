@@ -157,3 +157,7 @@ addCardModalCloseButton.addEventListener("click", () => {
   closePopUp(addCardModal);
 });
 addCardEditForm.addEventListener("submit", handleAddCardFormSubmit);
+//PREVIEW IMAGE CLOSE EVENTLISENER
+previewImageModalCloseButton.addEventListener("click", () => {
+  closePopUp(previewImageModal);
+});
