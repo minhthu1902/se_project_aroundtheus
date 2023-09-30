@@ -56,10 +56,8 @@ const profileEditForm = profileEditModal.querySelector(".modal__form");
 const addCardModal = document.querySelector("#add-card-modal");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const addCardEditForm = addCardModal.querySelector(".modal__form");
-const cardTitleInput = addCardEditForm.querySelector(
-  ".modal__input_type_title"
-);
-const cardUrlInput = addCardEditForm.querySelector(".modal__input_type_url");
+const cardTitleInput = addCardEditForm.querySelector("#card-title-input");
+const cardUrlInput = addCardEditForm.querySelector("#card-url-input");
 const addCardModalCloseButton = addCardModal.querySelector(".modal__close");
 
 //IMAGE PREVIEW
