@@ -185,6 +185,8 @@
   .modal__preview-image {
     width: 240px;
     height: 299px;
+    top: 136px;
+    left: 40px;
     /* display: flex; */
   }
   .modal__close_preview {
