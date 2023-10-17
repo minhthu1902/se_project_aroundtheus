@@ -65,17 +65,25 @@
           <input
             type="text"
             name="title"
-            class="modal__input"
+            required
+            minlength="2"
+            maxlength="40"
+            class="modal__input modal__input_type_name"
             id="profile-title-input"
             placeholder="Name"
           />
+          <span class="modal__error" id="profile-name-error"></span>
           <input
             type="text"
             name="description"
-            class="modal__input"
+            required
+            minlength="2"
+            maxlength="200"
+            class="modal__input modal__input_type_description"
             id="profile-description-input"
             placeholder="Profile Description"
           />
+          <span class="modal__error" id="profile-description-error"></span>
           <button class="modal__button" type="submit">Save</button>
         </form>
       </div>
@@ -89,38 +97,47 @@
           id="add-modal-close-button"
         ></button>
         <h2 class="modal__heading">New Place</h2>
-        <form class="modal__form" id="add-card-form">
+        <form class="modal__form" id="add-card-form" novalidate>
           <input
             type="text"
             name="title"
             required
             minlength="1"
             maxlength="30"
-            class="modal__input"
+            class="modal__input modal__input_type_title"
             id="card-title-input"
             placeholder="Title"
           />
+          <span class="modal__error" id="add-card-title-error"></span>
           <input
-            type="text"
+            type="url"
             name="url"
-            class="modal__input"
+            required
+            class="modal__input modal__input_type_url"
             id="card-url-input"
             placeholder="Image URL"
           />
-          <button class="modal__button" type="submit">Create</button>
+          <span class="modal__error" id="add-card-url-error"></span>
+          <button
+            class="modal__button modal__button_disabled"
+            disabled
+            type="submit"
+          >
+            Create
+          </button>
         </form>
       </div>
     </div>
     <!-- Image Preview Modal -->
     <div class="modal" id="preview-image-modal">
-      <div class="modal__content-preview">
+      <div class="modal__content modal__content-preview">
         <button
-          class="modal__close"
+          class="modal__close modal__close_type_preview"
           id="preview-modal-close-button"
           type="button"
         ></button>
 
-        <img src="#" alt="alt" class="modal__preview-image" />
+        <img src="#" alt="Preview Image" class="modal__preview-image" />
         <h2 class="modal__preview-title"></h2>
       </div>
     </div>
@@ -136,7 +153,7 @@
         </div>
       </li>
     </template>
-
-    <script defer src="./scripts/index.js"></script>
+    <script src="./scripts/index.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
   </body>
 </html>
