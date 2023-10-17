@@ -78,14 +78,16 @@ const previewImageModalCloseButton = document.querySelector(
 /* -------------------------------------------------------------------------- */
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeByEscape);
 }
 function openPopUp(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", closeByEscape);
 }
 
-function closeByEscape(e, modal) {
+function closeByEscape(e) {
+  const openedModal = document.querySelector(".modal_opened");
   if (e.key === "Escape") {
-    const openedModal = document.querySelector(".modal_opened");
     closePopUp(openedModal);
   }
 }
