@@ -116,7 +116,11 @@
   max-width: 109px;
   margin: 13px 0 18px 0;
 }
-
+.modal__button_disabled {
+  opacity: 0.2;
+  background-color: #fff;
+  color: #000;
+}
 .modal__content-preview {
   margin: auto;
   position: relative;
@@ -138,6 +142,25 @@
   width: 291px;
   height: 12px;
   bottom: -22px;
+}
+.modal__label {
+  position: relative;
+}
+.modal__input_type_error {
+  border-bottom: 1px solid #ff0000;
+}
+.modal__error {
+  color: #ff0000;
+  font-size: 12px;
+  font-weight: 400;
+  word-wrap: break-word;
+  opacity: 0;
+  position: absolute;
+  z-index: 2;
+  bottom: 29px;
+}
+.modal__error_visible {
+  opacity: 1;
 }
 
 @media screen and (max-width: 450px) {
