@@ -84,11 +84,10 @@ function openPopUp(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeByEscape);
 }
-
 function closeByEscape(e) {
-  const openedModal = document.querySelector(".modal_opened");
+  const modal = document.querySelector(".modal_opened");
   if (e.key === "Escape") {
-    closePopUp(openedModal);
+    closePopUp(modal);
   }
 }
 
@@ -129,6 +128,19 @@ function renderCard(cardData, cardsListEl) {
   const cardElement = getCardElement(cardData);
   cardsListEl.prepend(cardElement);
 }
+
+// Remote esc function
+function closeModalOnRemoteClick(e) {
+  //target is element on which the event happened
+  //current target is modal, if they're the same we close modal
+  if (
+    e.target === e.currentTarget ||
+    e.target.classList.contains("modal__close")
+  ) {
+    closePopUp(e.target);
+  }
+}
+
 // Close profile modal
 
 function handleProfileEditSubmit(e) {
@@ -143,8 +155,9 @@ function handleAddCardFormSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardsListEl);
-  closePopUp(addCardModal);
+
   addCardEditForm.reset();
+  closePopUp(addCardModal);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -167,6 +180,7 @@ profileCloseModal.addEventListener("click", () => {
 addCardModalCloseButton.addEventListener("click", () => {
   closePopUp(addCardModal);
 });
+
 previewImageModalCloseButton.addEventListener("click", () => {
   closePopUp(previewImageModal);
 });
@@ -179,17 +193,4 @@ addCardEditForm.addEventListener("submit", handleAddCardFormSubmit);
 //add card listeners
 addNewCardButton.addEventListener("click", () => {
   openPopUp(addCardModal);
-});
-
-//PREVIEW IMAGE CLOSE EVENT LISTENER
-
-[profileEditModal, addCardModal, previewImageModal].forEach((modal) => {
-  modal.addEventListener("mousedown", (e) => {
-    if (
-      e.target.classList.contains("modal") ||
-      e.target.classList.contains("modal__close")
-    ) {
-      closePopUp(modal);
-    }
-  });
 });

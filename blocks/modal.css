@@ -12,6 +12,7 @@
   opacity: 0;
   transition: visibility 0s linear 0.5s, opacity 0.5s linear;
   justify-content: center;
+  align-items: center;
 }
 .modal_opened {
   visibility: visible;
@@ -26,6 +27,7 @@
   padding: 36px;
   max-width: 430px;
   max-height: 330px;
+  align-items: center;
 }
 
 .modal__heading {
@@ -117,7 +119,7 @@
   margin: 13px 0 18px 0;
 }
 .modal__button_disabled {
-  opacity: 0.3;
+  opacity: 0.2;
   background-color: #fff;
   /* cursor: default; */
   color: #000;
@@ -131,6 +133,7 @@
 .modal__preview-image {
   max-width: 75vw;
   max-height: 75vh;
+  margin: 0 auto;
 }
 .modal__preview-title {
   /* position: absolute; */
@@ -164,6 +167,8 @@
   left: 0;
   /* margin-top: 6px; */
   transition: opacity 0.3s;
+  bottom: 29px;
+  z-index: 2;
 }
 .modal__error_visible {
   opacity: 1;

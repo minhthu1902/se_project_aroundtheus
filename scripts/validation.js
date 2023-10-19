@@ -47,11 +47,11 @@ function checkInputValidity(formElement, inputElement, options) {
 // }
 
 function toggleButtonState(
-  inputElement,
+  inputElements,
   submitButton,
   { inactiveButtonClass }
 ) {
-  if (hasInvalidInput(inputElement)) {
+  if (hasInvalidInput(inputElements)) {
     submitButton.classList.add(inactiveButtonClass);
     submitButton.disabled = true;
   } else {
