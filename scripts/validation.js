@@ -25,16 +25,15 @@ function hideInputError(
   errorMessage.classList.remove(errorClass);
 }
 
-function hasInvalidInput(inputElement) {
-  return !inputElement.validity.valid;
+function checkInputValidity(formElement, inputElement, options) {
+  if (!inputElement.validity.valid) {
+    return showInputError(formElement, inputElement, options);
+  }
+  hideInputError(formElement, inputElement, options);
 }
 
-function checkInputValidity(formElement, inputElement, options) {
-  if (hasInvalidInput(inputElement)) {
-    showInputError(formElement, inputElement, options);
-  } else {
-    hideInputError(formElement, inputElement, options);
-  }
+function hasInvalidInput(inputList) {
+  return !inputList.every((inputElement) => inputElement.validity.valid);
 }
 
 // function disableButton(submitButton, options) {
