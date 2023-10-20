@@ -85,12 +85,11 @@ function openPopUp(modal) {
   document.addEventListener("keydown", closeByEscape);
 }
 function closeByEscape(e) {
-  const modal = document.querySelector(".modal_opened");
   if (e.key === "Escape") {
+    const modal = document.querySelector(".modal_opened");
     closePopUp(modal);
   }
 }
-
 //get card
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
