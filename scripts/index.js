@@ -73,23 +73,53 @@ const previewImageModalCloseButton = document.querySelector(
   "#preview-modal-close-button"
 );
 
+// closing by clicking on overlay
+const handleModalClick = (e) => {
+  if (e.target.classList.contains("modal_opened")) {
+    closePopUp(e.target);
+  }
+};
 /* -------------------------------------------------------------------------- */
 /*                                  Functions                                 */
 /* -------------------------------------------------------------------------- */
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", closeByEscape);
+  modal.removeEventListener("mousedown", handleModalClick);
 }
 function openPopUp(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeByEscape);
+  modal.addEventListener("mousedown", handleModalClick);
 }
+//close by pressing Esc
 function closeByEscape(e) {
   if (e.key === "Escape") {
-    const modal = document.querySelector(".modal_opened");
-    closePopUp(modal);
+    const openedModal = document.querySelector(".modal_opened");
+    closePopUp(openedModal);
   }
 }
+// close by clicking overlay
+// function closeModalOnRemoteClick(e) {
+//   //target is element on which the event happened
+//   //current target is modal, if they're the same we close modal
+//   if (
+//     e.target === e.currentTarget ||
+//     e.target.classList.contains("modal__close")
+//   ) {
+//     closePopUp(e.target);
+//   }
+// }
+// [profileEditModal, addCardModal, previewImageModal].forEach((modal) => {
+//   modal.addEventListener("mousedown", (e) => {
+//     if (
+//       e.target.classList.contains("modal") ||
+//       e.target.classList.contains("modal__close")
+//     ) {
+//       closeModal(modal);
+//     }
+//   });
+// });
 //get card
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -126,18 +156,6 @@ function getCardElement(cardData) {
 function renderCard(cardData, cardsListEl) {
   const cardElement = getCardElement(cardData);
   cardsListEl.prepend(cardElement);
-}
-
-// Remote esc function
-function closeModalOnRemoteClick(e) {
-  //target is element on which the event happened
-  //current target is modal, if they're the same we close modal
-  if (
-    e.target === e.currentTarget ||
-    e.target.classList.contains("modal__close")
-  ) {
-    closePopUp(e.target);
-  }
 }
 
 // Close profile modal
