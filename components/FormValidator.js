@@ -7,13 +7,6 @@ export default class FormValidator {
     this._inactiveButtonClass = options.inactiveButtonClass;
     this._inputErrorClass = options.inputErrorClass;
     this._errorClass = options.errorClass;
-
-    // this._inputElements = [
-    //   ...this._formElement.querySelectorAll(this._inputSelector),
-    // ];
-    // this._submitButtons = this._formElement.querySelector(
-    //   this._submitButtonSelector
-    // );
   }
 
   _checkInputValidity(inputElement) {
