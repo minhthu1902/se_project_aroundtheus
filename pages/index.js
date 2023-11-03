@@ -203,7 +203,9 @@ function handleAddCardFormSubmit(e) {
 /*                               Event Listeners                              */
 /* -------------------------------------------------------------------------- */
 //Render content for each card
-initialCards.forEach((cardData) => renderCard(cardData, cardsListEl));
+initialCards.forEach((cardData) => {
+  renderCard(cardData);
+});
 
 //Open edit modal
 profileEditButton.addEventListener("click", () => {

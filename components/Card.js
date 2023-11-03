@@ -33,22 +33,22 @@ export default class Card {
 
   _handleDeleteCard() {
     this._cardElement.remove();
-    this._cardElement = null;
+    // this._cardElement = null;
   }
 
-  _handleImageClick() {
-    this._cardElement
-      .querySelector(".card__image")
-      .classList.add("modal_opened");
-  }
+  //   _handleImageClick() {
+  //     this._cardElement
+  //       .querySelector(".card__image")
+  //       .classList.add("modal_opened");
+  //   }
 
   _getCardTemplate() {
-    const element = document
+    const cardElement = document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
 
-    return element;
+    return cardElement;
   }
 
   getNewCard() {
