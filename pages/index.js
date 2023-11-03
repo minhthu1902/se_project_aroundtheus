@@ -85,6 +85,7 @@ const handleModalClick = (e) => {
     closePopUp(e.target);
   }
 };
+
 // form init
 const editProfileForm = document.querySelector("#edit-profile-form");
 /* -------------------------------------------------------------------------- */
@@ -172,6 +173,11 @@ function renderCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
   return card.getNewCard();
 }
+//Render content for each card
+initialCards.forEach((cardData) => {
+  const cardElement = renderCard(cardData);
+  cardsListEl.prepend(cardElement);
+});
 
 function handleImageClick() {
   previewImage.src = this._link;
@@ -202,10 +208,6 @@ function handleAddCardFormSubmit(e) {
 /* -------------------------------------------------------------------------- */
 /*                               Event Listeners                              */
 /* -------------------------------------------------------------------------- */
-//Render content for each card
-initialCards.forEach((cardData) => {
-  renderCard(cardData);
-});
 
 //Open edit modal
 profileEditButton.addEventListener("click", () => {
