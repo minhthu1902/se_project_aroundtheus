@@ -148,7 +148,12 @@
           type="button"
         ></button>
 
-        <img src="#" alt="Preview Image" class="modal__preview-image" />
+        <img
+          src="#"
+          alt="Preview Image"
+          class="modal__preview-image"
+          id="preview-image"
+        />
         <h2 class="modal__preview-title"></h2>
       </div>
     </div>
@@ -160,11 +165,14 @@
         <button class="card__delete-button" type="button"></button>
         <div class="card__description">
           <h2 class="card__title"></h2>
-          <button class="card__like-button" type="button"></button>
+          <button
+            class="card__like-button"
+            type="button"
+            aria-label="like"
+          ></button>
         </div>
       </li>
     </template>
-    <script src="./scripts/index.js" defer></script>
-    <script src="./scripts/validation.js" defer></script>
+    <script src="./pages/index.js" defer type="module"></script>
   </body>
 </html>
