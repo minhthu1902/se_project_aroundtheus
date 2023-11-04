@@ -220,15 +220,12 @@ profileEditButton.addEventListener("click", () => {
 profileCloseModal.addEventListener("click", () => {
   closePopUp(profileEditModal);
 });
-addCardModalCloseButton.addEventListener("click", (e) => {
-  if (e.target.classList.contains(".modal_opened")) {
-    closePopUp(addCardModal);
-  }
+addCardModalCloseButton.addEventListener("click", () => {
+  closePopUp(addCardModal);
 });
 
 previewImageModalCloseButton.addEventListener("click", () => {
-  if (e.target.classList.contains(".modal_opened"))
-    closePopUp(previewImageModal);
+  closePopUp(previewImageModal);
 });
 
 //Submit Listeners

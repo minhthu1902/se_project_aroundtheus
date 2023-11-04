@@ -32,12 +32,12 @@ export default class FormValidator {
   //   errorMessageEl.textContent = inputElement.validationMessage; //get validation message
   //   inputElement.classList.add(this._errorClass); //add error class and display error message
   // }
-  _showInputError(inputElement, errorMessageEl) {
+  _showInputError(inputElement) {
     const errorElementEl = this._formElement.querySelector(
       `.${inputElement.id}-error`
     );
     inputElement.classList.add(this._inputErrorClass);
-    errorElementEl.textContent = errorMessageEl;
+    errorElementEl.textContent = "";
     errorElementEl.classList.add(this._errorClass);
   }
 
@@ -111,7 +111,7 @@ export default class FormValidator {
     this._buttonElement = this._formElement.querySelector(
       this._submitButtonSelector
     );
-    this.toggleButtonState();
+    // this.toggleButtonState();
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
@@ -119,6 +119,7 @@ export default class FormValidator {
         this.toggleButtonState();
       });
     });
+    this.toggleButtonState();
   }
 
   enableValidation() {
