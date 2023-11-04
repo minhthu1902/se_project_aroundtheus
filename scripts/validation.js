@@ -19,6 +19,7 @@
 // function hasInvalidInput(inputList) {
 //   return !inputList.every((inputElement) => inputElement.validity.valid);
 // }
+
 // function checkInputValidity(formElement, inputElement, options) {
 //   if (!inputElement.validity.valid) {
 //     showInputError(formElement, inputElement, options);
