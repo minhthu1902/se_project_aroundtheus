@@ -50,7 +50,7 @@ export default class Card {
     this._likeButton = this._cardElement.querySelector(".card__like-button");
     this._trashButton = this._cardElement.querySelector(".card__delete-button");
     this._cardImage.src = this._link;
-    this._cardImage.alt = this.name;
+    this._cardImage.alt = this._name;
     this._cardTitle.textContent = this._name;
     this._setEventListeners();
 

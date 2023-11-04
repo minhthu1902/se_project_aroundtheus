@@ -221,6 +221,7 @@ profileCloseModal.addEventListener("click", () => {
   closePopUp(profileEditModal);
 });
 addCardModalCloseButton.addEventListener("click", () => {
+  addCardFormValidator.toggleButtonState();
   closePopUp(addCardModal);
 });
 
