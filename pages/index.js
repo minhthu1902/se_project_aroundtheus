@@ -225,7 +225,6 @@ profileCloseModal.addEventListener("click", () => {
   closePopUp(profileEditModal);
 });
 addCardModalCloseButton.addEventListener("click", () => {
-  addCardFormValidator.toggleButtonState();
   closePopUp(addCardModal);
 });
 
@@ -240,6 +239,7 @@ addCardEditForm.addEventListener("submit", handleAddCardFormSubmit);
 
 //add card listeners
 addNewCardButton.addEventListener("click", () => {
+  addCardFormValidator.toggleButtonState();
   openPopUp(addCardModal);
 });
 
