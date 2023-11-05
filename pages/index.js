@@ -43,6 +43,7 @@ const cardData = {
 
 // TEMPLATE
 const cardsListEl = document.querySelector(".cards__list");
+
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
@@ -171,13 +172,16 @@ function closeByEscape(e) {
 
 function renderCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
-  return card.getNewCard();
+
+  // return card.getNewCard();
+  cardsListEl.prepend(card.getNewCard());
 }
 //Render content for each card
-initialCards.forEach((cardData) => {
-  const cardElement = renderCard(cardData);
-  cardsListEl.prepend(cardElement);
-});
+// initialCards.forEach((cardData) => {
+//   const cardElement = renderCard(cardData);
+//   cardsListEl.prepend(cardElement);
+// });
+initialCards.forEach(renderCard);
 
 function handleImageClick() {
   previewImage.src = this._link;
