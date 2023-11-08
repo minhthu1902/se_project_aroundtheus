@@ -207,6 +207,7 @@ function handleAddCardFormSubmit(e) {
   addCardEditForm.reset();
   closePopUp(addCardModal);
   e.target.reset();
+  addCardFormValidator.disableButton();
 }
 
 /* -------------------------------------------------------------------------- */
