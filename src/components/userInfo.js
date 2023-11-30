@@ -1,4 +1,5 @@
 export class UserInfo {
+  //pass in selector's as argument
   constructor({ profileTitleSelector, profileDescriptionSelector }) {
     this._profileTitleElement = document.querySelector(profileTitleSelector);
     this._profileDescriptionElement = document.querySelector(
