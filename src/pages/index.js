@@ -1,42 +1,12 @@
 import Card from "../components/Card";
-import FormValidator from "../components/FormValidator.js";
+import { FormValidator } from "../components/FormValidator.js";
 import "./index.css";
+import UserInfo from "../components/UserInfo.js";
 
-const initialCards = [
-  {
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-    alt: "Yosemite Valley",
-  },
+import PopupWithImage from "../components/PopupWithImage.js";
+import Section from "../components/Section.js";
+import { initialCards, options } from "../utils/constants.js";
 
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-    alt: "Lake Louise",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-    alt: "Bald Mountains",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-    alt: "Latemar",
-  },
-
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-    alt: "Vanoise National Park",
-  },
-
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-    alt: "Lago di Braies",
-  },
-];
 const cardData = {
   name: "Yosemite Valley",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -110,66 +80,6 @@ function closeByEscape(e) {
     closePopUp(openedModal);
   }
 }
-// close by clicking overlay
-// function closeModalOnRemoteClick(e) {
-//   //target is element on which the event happened
-//   //current target is modal, if they're the same we close modal
-//   if (
-//     e.target === e.currentTarget ||
-//     e.target.classList.contains("modal__close")
-//   ) {
-//     closePopUp(e.target);
-//   }
-// }
-// [profileEditModal, addCardModal, previewImageModal].forEach((modal) => {
-//   modal.addEventListener("mousedown", (e) => {
-//     if (
-//       e.target.classList.contains("modal") ||
-//       e.target.classList.contains("modal__close")
-//     ) {
-//       closeModal(modal);
-//     }
-//   });
-// });
-
-//following function is used on project 6
-// function getCardElement(cardData) {
-//   const cardElement = cardTemplate.cloneNode(true);
-//   const cardImage = cardElement.querySelector(".card__image");
-//   const cardTitle = cardElement.querySelector(".card__title");
-
-//   //like btn
-//   const likeButton = cardElement.querySelector(".card__like-button");
-//   likeButton.addEventListener("click", () => {
-//     likeButton.classList.toggle("card__like-button-active");
-//   });
-
-//   //card delete btn
-//   const deleteButton = cardElement.querySelector(".card__delete-button");
-//   deleteButton.addEventListener("click", () => {
-//     cardElement.remove();
-//   });
-
-//   cardImage.src = cardData.link;
-//   cardImage.alt = cardData.name;
-//   cardTitle.textContent = cardData.name;
-
-//   //Image modal
-//   cardImage.addEventListener("click", function () {
-//     previewImage.src = cardData.link;
-//     previewImage.alt = cardData.name;
-//     previewImageTitle.textContent = cardData.name;
-//     openPopUp(previewImageModal);
-//   });
-
-//   return cardElement;
-// }
-
-//old function renderCard from project 6
-// function renderCard(cardData, cardsListEl) {
-//   const cardElement = getCardElement(cardData);
-//   cardsListEl.prepend(cardElement);
-// }
 
 function renderCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
@@ -244,16 +154,6 @@ addNewCardButton.addEventListener("click", () => {
   addCardFormValidator.toggleButtonState();
   openPopUp(addCardModal);
 });
-
-//Validation options
-const options = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
 
 const addCardFormValidator = new FormValidator(addCardEditForm, options);
 addCardFormValidator.enableValidation();
