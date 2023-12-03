@@ -1,18 +1,21 @@
 export default class Section {
-  constructor({ items, renderer }, cardSelector) {
-    this._items = items;
-    this.renderer = renderer;
-    this._cardSelector = cardSelector;
-    this.addItem = this.addItem;
+  constructor({ items, renderer }, containerSelector) {
+    this._items = items; //item that wants to convert to html
+    this.renderer = renderer; //take data and convert to html
+    this._container = document.querySelector(containerSelector);
   }
 
   renderItems() {
     this._items.forEach((data) => {
-      this.addItem(data);
+      this.addItem(data, "append");
     });
   }
-  addItem(data) {
+  addItem(data, placement = "prepend") {
     const element = this.renderer(data);
-    this._cardSelector.prepend(element);
+    if (place === "append") {
+      this.container.append(element);
+    } else if (placement === "prepend") {
+      this._container.prepend(element);
+    }
   }
 }

@@ -4,41 +4,42 @@ import Popup from "./Popup.js";
 
 import { UserInfo } from "./userInfo.js";
 
-export class PopupWithForm extends Popup {
-  constructor(
-    { popupSelector, handleFormSubmit } //where you set up method
-  ) {
-    super({ popupSelector }); //add-card-modal
-
+export default class PopupWithForm extends Popup {
+  constructor(modalSelector, handleFormSubmit) {
+    super(modalSelector); //add-card-modal
+    this._inputList = this._form.querySelector(".modal__input");
+    this._form = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
-    this._popupForm = this._popupElement.querySelectorAll(".modal_form");
-    this._saveButtons = saveButtons;
+    this.setEventListeners();
   }
 
-  open() {
-    super.open();
-  }
-  close() {
-    console.log(this._popupForm);
-    super.close();
-  }
+  // open() {
+  //   super.open();
+  // }
+  // close() {
+  //   console.log(this._popupForm);
+  //   super.close();
+  // }
 
-  _getInputValue() {
-    const inputInfos = this._popupForm.querySelectorAll(".modal__input");
-
-    inputInfos.forEach((input) => {
-      info[input.name] = input.value;
-
-      return info;
+  _getInputValues() {
+    const formValues = {};
+    this._inputList.forEach((input) => {
+      formValues[input.name] = input.value;
     });
+    return formValues;
+  }
+  setInputValues(userInfo) {
+    const userArray = Object.values(userInfo);
+    for (let i = 0; i < userArray.length; i++) {
+      this.inputList[i].value = userArray[i];
+    }
   }
   setEventListeners() {
-    this._saveButtons.forEach((button) => {
-      button.addEventListener("click", (e) => {
-        e.preventDefault();
-        this._handleFormSubmit(this._getInputValue());
-        this.close();
-      });
+    this._form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this._handleFormSubmit(this._getInputValues());
+      this._handleEscClose();
     });
+    super.setEventListeners();
   }
 }
