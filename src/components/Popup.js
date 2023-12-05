@@ -1,7 +1,7 @@
 export default class Popup {
-  constructor(modalSelector) {
+  constructor({ modalSelector }) {
     this._popupElement = document.querySelector(modalSelector);
-    // this._closeButton = this._popupElement.querySelector(".modal__close");
+    this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   open() {
@@ -35,7 +35,12 @@ export default class Popup {
   };
   setEventListeners() {
     // add a click event listener to close icon
-    this._popupCloseButton = this._popupElement.querySelector(".modal__close");
-    this._popupCloseButton.addEventListener("click", () => this.close());
+    const popupCloseButton = this._popupElement.querySelector(".modal__close");
+    popupCloseButton.addEventListener("click", () => this.close());
+    this._popupElement.addEventListener("click", (e) => {
+      if (e.target === this._popupElement) {
+        this.close();
+      }
+    });
   }
 }

@@ -1,3 +1,4 @@
+import PopupWithForm from "../components/PopupWithForm.js";
 export const initialCards = [
   {
     name: "Yosemite Valley",
@@ -41,7 +42,9 @@ export const cardData = {
 
 //templates and button
 export const cardsListEl = document.querySelector(".cards__list");
-export const profileEditButton = document.querySelector(".profile__edit-button");
+export const profileEditButton = document.querySelector(
+  ".profile__edit-button"
+);
 export const addNewCardButton = document.querySelector(".profile__add-button");
 
 //inputs
@@ -49,6 +52,31 @@ export const profileTitleInput = document.querySelector("#profile-title-input");
 export const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
+export const profileEditModal = document.querySelector("#profile-edit-modal");
+
+export const profileCloseModal =
+  profileEditModal.querySelector(".modal__close");
+// const profileTitle = document.querySelector(".profile__title");
+// const profileDescription = document.querySelector(".profile__description");
+
+export const profileEditForm = profileEditModal.querySelector(".modal__form");
+
+// Profile add card button
+// const addCardModal = document.querySelector("#add-card-modal");
+export const addCardEditForm = document.querySelector("#add-card-form");
+// const cardTitleInput = addCardEditForm.querySelector("#card-title-input");
+// const cardUrlInput = addCardEditForm.querySelector("#card-url-input");
+export const addCardModalCloseButton = document.querySelector(".modal__close");
+//Preview Image
+// const previewImageModal = document.querySelector("#preview-image-modal");
+export const previewImage = document.querySelector("#preview-image");
+export const previewImageTitle = document.querySelector("#preview-title");
+export const previewImageModalCloseButton = document.querySelector(
+  "#preview-modal-close-button"
+);
+export const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
+export const editProfileForm = document.querySelector("#edit-profile-form");
 //Validation options
 export const options = {
   formSelector: ".modal__form",

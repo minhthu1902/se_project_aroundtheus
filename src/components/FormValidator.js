@@ -1,14 +1,14 @@
-export class FormValidator {
+export default class FormValidator {
   constructor(formElement, options) {
     this._formElement = formElement;
     this._formSelector = options.formSelector;
     this._inputSelector = options.inputSelector;
-    this.inputList = Array.from(
-      this._formElement.querySelectorAll(this._inputSelector)
-    );
-    this._submitButton = this._formElement.querySelector(
-      options.submitButtonSelector
-    );
+    // this.inputList = Array.from(
+    //   this._formElement.querySelectorAll(this._inputSelector)
+    // );
+    // this._submitButton = this._formElement.querySelector(
+    //   options.submitButtonSelector
+    // );
     this._inactiveButtonClass = options.inactiveButtonClass;
     this._inputErrorClass = options.inputErrorClass;
     this._errorClass = options.errorClass;
