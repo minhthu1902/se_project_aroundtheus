@@ -16,6 +16,7 @@ import {
   addCardModalCloseButton,
   editProfileForm,
   options,
+  cardTemplate,
 } from "../utils/constants.js";
 
 // closing by clicking on overlay
@@ -116,11 +117,14 @@ const profileUserInfo = new UserInfo({
 });
 
 const createCard = (cardData) => {
-  const newCard = new Card(
+  const newCard = new Card( //call out Card class with corresponding
+    // argument in constructor
+    // luu y: thu tu cua argument phai trung voi thu tu o Card class
+    // ben card.js
     cardData,
-    cardsListEl,
+    "#card-template", // khop voi cardSelector ben Card class
     previewImageModal,
-    (title, link) => previewImageModal.open(title, link)
+    (name, link) => previewImageModal.open(name, link)
   );
   cardSection.addItem(newCard.getNewCard());
 };
