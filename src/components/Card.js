@@ -51,7 +51,7 @@ export default class Card {
   }
 
   getNewCard() {
-    const cardData = { name: this._name, link: this._link };
+    // const cardData = { name: this._name, link: this._link };
     this._cardElement = this._getTemplate();
     this._cardTitle = this._cardElement.querySelector(".card__title");
     this._cardImage = this._cardElement.querySelector(".card__image");
@@ -59,7 +59,7 @@ export default class Card {
     this._cardImage.addEventListener("click", this._handleImageClick);
     this._trashButton = this._cardElement.querySelector(".card__delete-button");
     this._renderCard();
-    // this._cardTitle.textContent = this._name;
+    this._cardTitle.textContent = this._name;
     this._setEventListeners();
 
     return this._cardElement;
