@@ -18,7 +18,10 @@ import {
   previewImageModalCloseButton,
   options,
   cardTemplate,
+  profileTitleInput,
+  profileDescriptionInput,
 } from "../utils/constants.js";
+import userInfo from "../components/userInfo.js";
 
 // function handleImageClick() {
 //   // previewImageModal.open(title, link);
@@ -29,17 +32,26 @@ import {
 // }
 
 //Handle profile edit
-const profileUserInfo = new UserInfo({
+const profileUserInfo = new userInfo({
   profileTitleSelector: ".profile__title",
   profileDescriptionSelector: ".profile__description",
 });
 
+// profileEditButton.addEventListener("click", () => {
+//   const userInfo = profileUserInfo.getUserInfo();
+//   profileEditModalFormValidator.resetValidation();
+//   editProfileModal._getInputValues(userInfo);
+//   editProfileModal.open();
+// });
 profileEditButton.addEventListener("click", () => {
-  const userInfo = profileUserInfo.getUserInfo();
+  const { userName, userDescription } = profileUserInfo.getUserInfo();
+  profileTitleInput.value = userName;
+  profileDescriptionInput.value = userDescription;
   profileEditModalFormValidator.resetValidation();
   editProfileModal._getInputValues(userInfo);
   editProfileModal.open();
 });
+
 function handleProfileEditSubmit(formData) {
   console.log(formData);
   profileUserInfo.setUserInfo(formData.title, formData.description);
@@ -56,7 +68,7 @@ const editProfileModal = new PopupWithForm(
 // Close add card modal
 function handleAddCardFormSubmit(formData) {
   const card = createCard(formData);
-  // const cardData = { name: inputValues.title, link: inputValues.url };
+  const cardData = { name: formData.title, link: formData.url };
   // cardsListEl.prepend(card);
   addCardEditForm.reset();
   addCardModal.close();
@@ -67,8 +79,7 @@ function handleImagePreview(name, link) {
   previewImageModal.open(name, link);
 }
 const createCard = (cardData) => {
-  const newCard = new Card( //call out Card class with corresponding
-    // argument in constructor
+  const newCard = new Card( //call out Card class with corresponding argument in constructor
     // luu y: thu tu cua argument phai trung voi thu tu o Card class ben card.js
     cardData,
     "#card-template", // khop voi cardSelector ben Card class
