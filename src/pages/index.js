@@ -54,22 +54,21 @@ profileEditButton.addEventListener("click", () => {
 
 function handleProfileEditSubmit(formData) {
   console.log(formData);
-  profileUserInfo.setUserInfo(formData.title, formData.description);
+  profileUserInfo.setUserInfo(formData.name, formData.description);
   editProfileModal.close();
   profileEditModalFormValidator.open();
 }
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
-  ({ title, link }) => {
-    handleProfileEditSubmit(title, link);
+  ({ name, link }) => {
+    handleProfileEditSubmit(name, link);
   }
 );
 
 // Close add card modal
 function handleAddCardFormSubmit(formData) {
-  const card = createCard(formData);
-  const cardData = { name: formData.title, link: formData.url };
-  // cardsListEl.prepend(card);
+  const cards = createCard({ name: formData.name, link: formData.url });
+  cardTemplate.prepend(cards);
   addCardEditForm.reset();
   addCardModal.close();
   addCardFormValidator.toggleButtonState();
@@ -105,8 +104,8 @@ const profileEditModalFormValidator = new FormValidator(
   options
 );
 
-const addCardModal = new PopupWithForm("#add-card-modal", ({ title, link }) => {
-  handleAddCardFormSubmit(title, link);
+const addCardModal = new PopupWithForm("#add-card-modal", ({ name, link }) => {
+  handleAddCardFormSubmit(name, link);
 });
 addCardModal.setEventListeners();
 

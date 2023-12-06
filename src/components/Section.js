@@ -8,6 +8,7 @@ export default class Section {
   renderItems() {
     this._items.forEach(this._renderer);
   }
+
   addItem(data, placement = "prepend") {
     const element = this.renderer(data);
     if (place === "append") {
