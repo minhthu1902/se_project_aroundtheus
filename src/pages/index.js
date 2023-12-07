@@ -1,3 +1,4 @@
+import Popup from "../components/Popup.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import "./index.css";
@@ -21,18 +22,21 @@ import {
   profileTitleInput,
   profileDescriptionInput,
 } from "../utils/constants.js";
-import userInfo from "../components/userInfo.js";
 
-// function handleImageClick() {
-//   // previewImageModal.open(title, link);
-//   previewImage.src = this._link;
-//   previewImage.alt = this._name;
-//   previewImageTitle.textContent = this._name;
-//   openPopUp(previewImageModal);
-// }
+function handleImageClick() {
+  previewImageModal.open(title, link);
+  previewImage.src = this._link;
+  previewImage.alt = this._name;
+  previewImageTitle.textContent = this._name;
+  previewImageModal.open();
+}
 
-//Handle profile edit
-const profileUserInfo = new userInfo({
+// PROFILE EDIT
+const profileEditModalFormValidator = new FormValidator(
+  editProfileForm,
+  options
+);
+const profileUserInfo = new UserInfo({
   profileTitleSelector: ".profile__title",
   profileDescriptionSelector: ".profile__description",
 });
@@ -44,28 +48,34 @@ const profileUserInfo = new userInfo({
 //   editProfileModal.open();
 // });
 profileEditButton.addEventListener("click", () => {
-  const { userName, userDescription } = profileUserInfo.getUserInfo();
-  profileTitleInput.value = userName;
-  profileDescriptionInput.value = userDescription;
+  profileUserInfo.getUserInfo({
+    userName: profileTitleInput.value,
+    userDescription: profileDescriptionInput.value,
+  });
+  // const { userName, userDescription } = profileUserInfo.getUserInfo();
+  // profileTitleInput.value = userName;
+  // profileDescriptionInput.value = userDescription;
   profileEditModalFormValidator.resetValidation();
-  editProfileModal._getInputValues(userInfo);
+  editProfileModal._getInputValues();
   editProfileModal.open();
+  handleProfileEditSubmit();
 });
 
 function handleProfileEditSubmit(formData) {
-  console.log(formData);
+  // console.log(formData);
   profileUserInfo.setUserInfo(formData.name, formData.description);
+  editProfileForm.reset();
   editProfileModal.close();
+  profileEditModalFormValidator.toggleButtonState();
   profileEditModalFormValidator.open();
 }
+
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
-  ({ name, link }) => {
-    handleProfileEditSubmit(name, link);
-  }
+  handleProfileEditSubmit
 );
 
-// Close add card modal
+// ADD NEW CARD
 function handleAddCardFormSubmit(formData) {
   const cards = createCard({ name: formData.name, link: formData.url });
   cardTemplate.prepend(cards);
@@ -74,9 +84,6 @@ function handleAddCardFormSubmit(formData) {
   addCardFormValidator.toggleButtonState();
 }
 
-function handleImagePreview(name, link) {
-  previewImageModal.open(name, link);
-}
 const createCard = (cardData) => {
   const newCard = new Card( //call out Card class with corresponding argument in constructor
     // luu y: thu tu cua argument phai trung voi thu tu o Card class ben card.js
@@ -99,14 +106,11 @@ addNewCardButton.addEventListener("click", () => {
 });
 
 const addCardFormValidator = new FormValidator(addCardEditForm, options);
-const profileEditModalFormValidator = new FormValidator(
-  editProfileForm,
-  options
-);
 
-const addCardModal = new PopupWithForm("#add-card-modal", ({ name, link }) => {
-  handleAddCardFormSubmit(name, link);
-});
+const addCardModal = new PopupWithForm(
+  "#add-card-modal",
+  handleAddCardFormSubmit
+);
 addCardModal.setEventListeners();
 
 addCardModalCloseButton.addEventListener("click", () => {
@@ -115,8 +119,7 @@ addCardModalCloseButton.addEventListener("click", () => {
 
 //Submit Listeners
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-
-addCardEditForm.addEventListener("submit", handleAddCardFormSubmit);
+// addCardEditForm.addEventListener("submit", handleAddCardFormSubmit);
 
 // Image preview
 const previewImageModal = new PopupWithImage({
@@ -124,9 +127,14 @@ const previewImageModal = new PopupWithImage({
 });
 previewImageModal.setEventListeners();
 
+function handleImagePreview(cardData) {
+  previewImageModal.open(cardData.name, cardData.link);
+} // it needs name and link to display image on preview
+
 previewImageModalCloseButton.addEventListener("click", () => {
   previewImageModal.close();
 });
+
 /* ----------------------- */
 /*     Form Validation     */
 /* ----------------------- */
@@ -142,7 +150,8 @@ const enableValidation = (options) => {
   });
 };
 enableValidation(options);
+
 //Initialization
 profileEditModalFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
-cardSection.renderItems(); // render InitialsCard
+cardSection.renderItems();

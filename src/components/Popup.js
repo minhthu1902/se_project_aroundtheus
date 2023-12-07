@@ -6,7 +6,7 @@ export default class Popup {
 
   open() {
     //open popup
-    // console.log(this);
+    console.log(this);
     this._popupElement.classList.add("modal_opened");
     document.addEventListener("keyup", this._handleEscClose);
     // document.addEventListener("mousedown", this._handleImageClick);
@@ -25,14 +25,14 @@ export default class Popup {
       document.removeEventListener("click", this._handleOverlay);
     }
   }
-  // _handleImageClick = (e) => {
-  //   if (
-  //     e.target.classList.contains("modal_opened") ||
-  //     e.target.classList.contains("modal__close")
-  //   ) {
-  //     this.close();
-  //   }
-  // };
+  _handleImageClick = (e) => {
+    if (
+      e.target.classList.contains("modal_opened") ||
+      e.target.classList.contains("modal__close")
+    ) {
+      this.close();
+    }
+  };
   setEventListeners() {
     // add a click event listener to close icon
     this._popupCloseButton = this._popupElement.querySelector(".modal__close");
