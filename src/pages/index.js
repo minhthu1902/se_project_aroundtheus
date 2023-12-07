@@ -65,9 +65,9 @@ function handleProfileEditSubmit(formData) {
   // console.log(formData);
   profileUserInfo.setUserInfo(formData.name, formData.description);
   editProfileForm.reset();
+  editProfileModal.open();
   editProfileModal.close();
   profileEditModalFormValidator.toggleButtonState();
-  profileEditModalFormValidator.open();
 }
 
 const editProfileModal = new PopupWithForm(
