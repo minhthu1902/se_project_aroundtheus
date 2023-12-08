@@ -18,7 +18,7 @@ export default class Card {
   //   );
   // }
   _handleLikeIcon() {
-    this._likeButton.classList.toggle("card__like-button_active");
+    this._likeButton.classList.toggle("card__like-button-active");
   }
 
   _handleDeleteCard() {
