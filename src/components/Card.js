@@ -13,14 +13,14 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._likeButton = this._cardElement
+    this._cardElement
       .querySelector(".card__like-button")
       .addEventListener("click", () => {
         this._handleLikeIcon();
       });
 
     // card delete button
-    this._trashButton = this._cardElement
+    this._cardElement
       .querySelector(".card__delete-button")
       .addEventListener("click", () => {
         this._handleDeleteCard();
