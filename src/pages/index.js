@@ -24,7 +24,7 @@ import {
 } from "../utils/constants.js";
 
 function handleImageClick() {
-  previewImageModal.open(title, link);
+  // previewImageModal.open(title, link);
   previewImage.src = this._link;
   previewImage.alt = this._name;
   previewImageTitle.textContent = this._name;
@@ -41,12 +41,6 @@ const profileUserInfo = new UserInfo({
   profileDescriptionSelector: ".profile__description",
 });
 
-// profileEditButton.addEventListener("click", () => {
-//   const userInfo = profileUserInfo.getUserInfo();
-//   profileEditModalFormValidator.resetValidation();
-//   editProfileModal._getInputValues(userInfo);
-//   editProfileModal.open();
-// });
 profileEditButton.addEventListener("click", () => {
   profileUserInfo.getUserInfo({
     userName: profileTitleInput.value,
@@ -63,7 +57,6 @@ function handleProfileEditSubmit(formData) {
   editProfileForm.reset();
   editProfileModal.close();
   profileEditModalFormValidator.toggleButtonState();
-  editProfileModal.open(formData);
 }
 
 const editProfileModal = new PopupWithForm(
@@ -75,8 +68,8 @@ const editProfileModal = new PopupWithForm(
 function handleAddCardFormSubmit(formData) {
   const cards = createCard({ name: formData.name, link: formData.url });
   cardTemplate.prepend(cards);
-  addCardEditForm.reset();
   addCardModal.close();
+  addCardEditForm.reset();
   addCardFormValidator.toggleButtonState();
 }
 
@@ -131,18 +124,18 @@ previewImageModalCloseButton.addEventListener("click", () => {
 /* ----------------------- */
 /*     Form Validation     */
 /* ----------------------- */
-const formValidators = {};
+// const formValidators = {};
 
-const enableValidation = (options) => {
-  const formList = Array.from(document.querySelectorAll(options.formSelector));
-  formList.forEach((formElement) => {
-    const validator = new FormValidator(formElement, options);
-    const formName = formElement.getAttribute("name");
-    formValidators[formName] = validator;
-    validator.enableValidation();
-  });
-};
-enableValidation(options);
+// const enableValidation = (options) => {
+//   const formList = Array.from(document.querySelectorAll(options.formSelector));
+//   formList.forEach((formElement) => {
+//     const validator = new FormValidator(formElement, options);
+//     const formName = formElement.getAttribute("name");
+//     formValidators[formName] = validator;
+//     validator.enableValidation();
+//   });
+// };
+// enableValidation(options);
 
 //Initialization
 profileEditModalFormValidator.enableValidation();

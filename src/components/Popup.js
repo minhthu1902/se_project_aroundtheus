@@ -30,6 +30,7 @@ export default class Popup {
     e.preventDefault();
     if (e.key === "Escape") {
       this.close();
+      document.removeEventListener("click", this._handleImageClick);
     }
   }
   _handleImageClick(e) {
