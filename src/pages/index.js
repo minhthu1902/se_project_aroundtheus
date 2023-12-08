@@ -58,14 +58,12 @@ profileEditButton.addEventListener("click", () => {
   profileEditModalFormValidator.resetValidation();
   editProfileModal._getInputValues();
   editProfileModal.open();
-  handleProfileEditSubmit();
 });
 
 function handleProfileEditSubmit(formData) {
   // console.log(formData);
   profileUserInfo.setUserInfo(formData.name, formData.description);
   editProfileForm.reset();
-  editProfileModal.open();
   editProfileModal.close();
   profileEditModalFormValidator.toggleButtonState();
 }

@@ -10,9 +10,9 @@ export default class Section {
   }
 
   addItem(data, placement = "prepend") {
-    const element = this.renderer(data);
+    const element = this._renderer(data);
     if (place === "append") {
-      this.container.append(element);
+      this._container.append(element);
     } else if (placement === "prepend") {
       this._container.prepend(element);
     }
