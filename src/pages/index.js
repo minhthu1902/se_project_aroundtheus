@@ -28,7 +28,6 @@ function handleImageClick() {
   previewImage.src = this._link;
   previewImage.alt = this._name;
   previewImageTitle.textContent = this._name;
-  previewImageModal.open();
 }
 
 // PROFILE EDIT
@@ -112,10 +111,6 @@ addCardModal.setEventListeners();
 addCardModalCloseButton.addEventListener("click", () => {
   addCardModal.close();
 });
-
-//Submit Listeners
-profileEditForm.addEventListener("submit", handleProfileEditSubmit);
-// addCardEditForm.addEventListener("submit", handleAddCardFormSubmit);
 
 // Image preview
 const previewImageModal = new PopupWithImage({
