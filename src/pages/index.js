@@ -28,6 +28,7 @@ function handleImageClick() {
   previewImage.src = this._link;
   previewImage.alt = this._name;
   previewImageTitle.textContent = this._name;
+  previewImageModal.open();
 }
 
 // PROFILE EDIT

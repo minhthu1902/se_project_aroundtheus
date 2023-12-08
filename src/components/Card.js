@@ -33,14 +33,15 @@ export default class Card {
       });
   }
 
-  // _handleLikeIcon() {
-  //   this._likeButton.addEventListener("click", () => {
-  //     this._likeButton.classList.toggle("card__like-button_active");
-  //   });
-  // }
   _handleLikeIcon() {
-    this._likeButton.classList.toggle("card__like-button_active");
+    this._likeButton.addEventListener("click", () => {
+      this._likeButton.classList.toggle("card__like-button_active");
+    });
   }
+  // _handleLikeIcon() {
+  //   this._likeButton.classList.toggle("card__like-button_active");
+  // }
+
   _handleDeleteCard() {
     this._cardElement.remove();
     // this._cardElement = null;
