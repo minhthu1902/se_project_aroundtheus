@@ -100,7 +100,6 @@ const addCardModal = new PopupWithForm(
   "#add-card-modal",
   handleAddCardFormSubmit
 );
-addCardModal.setEventListeners();
 
 addCardModalCloseButton.addEventListener("click", () => {
   addCardModal.close();
