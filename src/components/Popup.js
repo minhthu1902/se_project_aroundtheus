@@ -16,13 +16,20 @@ export default class Popup {
     // console.log(this);
     this._popupElement.classList.remove("modal_opened");
     document.removeEventListener("keyup", this._handleEscClose);
-    document.removeEventListener("mousedown", this._handleModalClick);
+    document.removeEventListener("mousedown", this._handleImageClick);
   }
+  // _handleEscClose(e) {
+  //   e.preventDefault();
+  //   if (e.key === "Escape") {
+  //     this.close();
+  //     document.removeEventListener("click", this._handleImageClick);
+  //   }
+  // }
+
   _handleEscClose(e) {
     e.preventDefault();
     if (e.key === "Escape") {
       this.close();
-      document.removeEventListener("click", this._handleOverlay);
     }
   }
   _handleImageClick = (e) => {
@@ -38,7 +45,7 @@ export default class Popup {
     this._popupCloseButton = this._popupElement.querySelector(".modal__close");
     this._popupCloseButton.addEventListener("click", () => this.close());
 
-    this._popupElement.addEventListener("click", (e) => {
+    this._popupElement.addEventListener("mousedown", (e) => {
       if (
         e.target === this._popupElement ||
         e.target.classList.contains("modal__close")

@@ -52,20 +52,18 @@ profileEditButton.addEventListener("click", () => {
     userName: profileTitleInput.value,
     userDescription: profileDescriptionInput.value,
   });
-  // const { userName, userDescription } = profileUserInfo.getUserInfo();
-  // profileTitleInput.value = userName;
-  // profileDescriptionInput.value = userDescription;
   profileEditModalFormValidator.resetValidation();
   editProfileModal._getInputValues();
   editProfileModal.open();
 });
 
 function handleProfileEditSubmit(formData) {
-  // console.log(formData);
+  console.log(formData);
   profileUserInfo.setUserInfo(formData.name, formData.description);
   editProfileForm.reset();
   editProfileModal.close();
   profileEditModalFormValidator.toggleButtonState();
+  editProfileModal.open(formData);
 }
 
 const editProfileModal = new PopupWithForm(
@@ -122,6 +120,7 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 // Image preview
 const previewImageModal = new PopupWithImage({
   modalSelector: "#preview-image-modal",
+  handleImageClick,
 });
 previewImageModal.setEventListeners();
 
