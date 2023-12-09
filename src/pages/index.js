@@ -76,8 +76,8 @@ function getCard(cardData) {
   const cardElement = new Card( //call out Card class with corresponding argument in Card class constructor
     cardData,
     "#card-template",
-    handleImagePreview,
-    (name, link) => previewImageModal.open(name, link)
+    handleImagePreview
+    // (name, link) => previewImageModal.open(name, link)
   );
   return cardElement.getNewCard();
 }
@@ -86,17 +86,6 @@ const createCard = (item) => {
   const newCard = getCard(item);
   cardSection.addItem(newCard);
 };
-
-// const createCard = (cardData) => {
-//   const newCard = new Card( //call out Card class with corresponding argument in constructor
-//     // luu y: thu tu cua argument phai trung voi thu tu o Card class ben card.js
-//     cardData,
-//     "#card-template", // khop voi cardSelector ben Card class
-//     handleImagePreview,
-//     (name, link) => previewImageModal.open(name, link)
-//   );
-//   cardSection.addItem(newCard.getNewCard());
-// };
 
 const cardSection = new Section(
   { items: initialCards, renderer: createCard },
