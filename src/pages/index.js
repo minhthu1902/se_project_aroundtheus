@@ -63,7 +63,7 @@ const editProfileModal = new PopupWithForm(
 function handleAddCardFormSubmit(formData) {
   const cards = getCard({ name: formData.name, link: formData.url });
   cardSection.addItem(cards);
-  // addCardModal.close();
+  addCardModal.close();
   // addCardEditForm.reset();
   // addCardFormValidator.toggleButtonState();
 }
