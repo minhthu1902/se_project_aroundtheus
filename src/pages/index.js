@@ -23,7 +23,9 @@ import {
   profileDescriptionInput,
 } from "../utils/constants.js";
 
-// PROFILE EDIT
+/* ----------------------- */
+/*     Profile Edit        */
+/* ----------------------- */
 const profileEditModalFormValidator = new FormValidator(
   editProfileForm,
   options
@@ -39,7 +41,6 @@ profileEditButton.addEventListener("click", () => {
     userDescription: profileDescriptionInput.value,
   });
   profileEditModalFormValidator.resetValidation();
-  editProfileModal._getInputValues();
   editProfileModal.open();
 });
 
@@ -55,14 +56,9 @@ const editProfileModal = new PopupWithForm(
   handleProfileEditSubmit
 );
 
-// ADD NEW CARD
-// function handleAddCardFormSubmit(formData) {
-//   const cards = createCard({ name: formData.name, link: formData.url });
-//   cardTemplate.prepend(cards);
-//   addCardModal.close();
-//   addCardEditForm.reset();
-//   addCardFormValidator.toggleButtonState();
-// }
+/* ----------------------- */
+/*     ADD CARD            */
+/* ----------------------- */
 
 function handleAddCardFormSubmit(formData) {
   const cards = getCard({ name: formData.name, link: formData.url });
@@ -73,12 +69,7 @@ function handleAddCardFormSubmit(formData) {
 }
 
 function getCard(cardData) {
-  const cardElement = new Card( //call out Card class with corresponding argument in Card class constructor
-    cardData,
-    "#card-template",
-    handleImagePreview
-    // (name, link) => previewImageModal.open(name, link)
-  );
+  const cardElement = new Card(cardData, "#card-template", handleImagePreview); //call out Card class with corresponding argument in Card class constructor
   return cardElement.getNewCard();
 }
 
@@ -104,11 +95,10 @@ const addCardModal = new PopupWithForm(
   handleAddCardFormSubmit
 );
 
-// addCardModalCloseButton.addEventListener("click", () => {
-//   addCardModal.close();
-// });
+/* ----------------------- */
+/*     Image Preview      */
+/* ----------------------*/
 
-// Image preview
 const previewImageModal = new PopupWithImage({
   modalSelector: "#preview-image-modal",
 });
