@@ -10,8 +10,8 @@ export default class UserInfo {
   getUserInfo() {
     //object with user info
     return {
-      profileTitleElement: this._profileTitleElement.textContent,
-      profileDescriptionElement: this._profileDescriptionElement.textContent,
+      profileTitle: this._profileTitleElement.textContent,
+      profileDescription: this._profileDescriptionElement.textContent,
     };
   }
   setUserInfo(userName, userDescription) {
