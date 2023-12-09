@@ -23,14 +23,6 @@ import {
   profileDescriptionInput,
 } from "../utils/constants.js";
 
-function handleImageClick() {
-  // previewImageModal.open(title, link);
-  previewImage.src = this._link;
-  previewImage.alt = this._name;
-  previewImageTitle.textContent = this._name;
-  previewImageModal.open();
-}
-
 // PROFILE EDIT
 const profileEditModalFormValidator = new FormValidator(
   editProfileForm,
@@ -54,7 +46,6 @@ profileEditButton.addEventListener("click", () => {
 function handleProfileEditSubmit(formData) {
   console.log(formData);
   profileUserInfo.setUserInfo(formData.name, formData.description);
-  editProfileForm.reset();
   editProfileModal.close();
   profileEditModalFormValidator.toggleButtonState();
 }
@@ -65,24 +56,47 @@ const editProfileModal = new PopupWithForm(
 );
 
 // ADD NEW CARD
+// function handleAddCardFormSubmit(formData) {
+//   const cards = createCard({ name: formData.name, link: formData.url });
+//   cardTemplate.prepend(cards);
+//   addCardModal.close();
+//   addCardEditForm.reset();
+//   addCardFormValidator.toggleButtonState();
+// }
+
 function handleAddCardFormSubmit(formData) {
-  const cards = createCard({ name: formData.name, link: formData.url });
-  cardTemplate.prepend(cards);
-  addCardModal.close();
-  addCardEditForm.reset();
-  addCardFormValidator.toggleButtonState();
+  const cards = getCard({ name: formData.name, link: formData.url });
+  cardSection.addItem(cards);
+  // addCardModal.close();
+  // addCardEditForm.reset();
+  // addCardFormValidator.toggleButtonState();
 }
 
-const createCard = (cardData) => {
-  const newCard = new Card( //call out Card class with corresponding argument in constructor
-    // luu y: thu tu cua argument phai trung voi thu tu o Card class ben card.js
+function getCard(cardData) {
+  const cardElement = new Card( //call out Card class with corresponding argument in Card class constructor
     cardData,
-    "#card-template", // khop voi cardSelector ben Card class
+    "#card-template",
     handleImagePreview,
     (name, link) => previewImageModal.open(name, link)
   );
-  cardSection.addItem(newCard.getNewCard());
+  return cardElement.getNewCard();
+}
+
+const createCard = (item) => {
+  const newCard = getCard(item);
+  cardSection.addItem(newCard);
 };
+
+// const createCard = (cardData) => {
+//   const newCard = new Card( //call out Card class with corresponding argument in constructor
+//     // luu y: thu tu cua argument phai trung voi thu tu o Card class ben card.js
+//     cardData,
+//     "#card-template", // khop voi cardSelector ben Card class
+//     handleImagePreview,
+//     (name, link) => previewImageModal.open(name, link)
+//   );
+//   cardSection.addItem(newCard.getNewCard());
+// };
 
 const cardSection = new Section(
   { items: initialCards, renderer: createCard },
@@ -101,14 +115,13 @@ const addCardModal = new PopupWithForm(
   handleAddCardFormSubmit
 );
 
-addCardModalCloseButton.addEventListener("click", () => {
-  addCardModal.close();
-});
+// addCardModalCloseButton.addEventListener("click", () => {
+//   addCardModal.close();
+// });
 
 // Image preview
 const previewImageModal = new PopupWithImage({
   modalSelector: "#preview-image-modal",
-  handleImageClick,
 });
 previewImageModal.setEventListeners();
 
