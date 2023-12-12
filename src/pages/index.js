@@ -44,10 +44,18 @@ profileEditButton.addEventListener("click", () => {
   editProfileModal.open();
 });
 
+function openEditForm() {
+  const user = UserInfo.getUserInfo();
+  profileTitleInput.value = user.name;
+  profileDescriptionInput.value = user.description;
+  editProfileModal.open();
+}
+
 function handleProfileEditSubmit(formData) {
-  console.log(formData);
+  // console.log(formData);
   profileUserInfo.setUserInfo(formData.name, formData.description);
   editProfileModal.close();
+  openEditForm.close();
   profileEditModalFormValidator.toggleButtonState();
 }
 
