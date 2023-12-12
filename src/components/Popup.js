@@ -23,8 +23,6 @@ export default class Popup {
   }
   setEventListeners() {
     // add a click event listener to close icon
-    this._popupCloseButton = this._popupElement.querySelector(".modal__close");
-
     this._popupElement.addEventListener("mousedown", (e) => {
       if (
         e.target === this._popupElement ||

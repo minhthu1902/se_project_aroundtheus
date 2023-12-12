@@ -2,7 +2,7 @@ import Popup from "../components/Popup.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import "./index.css";
-import UserInfo from "../components/userInfo.js";
+import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
@@ -36,27 +36,16 @@ const profileUserInfo = new UserInfo({
 });
 
 profileEditButton.addEventListener("click", () => {
-  profileUserInfo.getUserInfo({
-    userName: profileTitleInput.value,
-    userDescription: profileDescriptionInput.value,
-  });
+  const user = profileUserInfo.getUserInfo();
+  profileTitleInput.value = user.profileTitle;
+  profileDescriptionInput.value = user.profileDescription;
   profileEditModalFormValidator.resetValidation();
   editProfileModal.open();
 });
 
-function openEditForm() {
-  const user = UserInfo.getUserInfo();
-  profileTitleInput.value = user.name;
-  profileDescriptionInput.value = user.description;
-  editProfileModal.open();
-}
-
 function handleProfileEditSubmit(formData) {
-  // console.log(formData);
   profileUserInfo.setUserInfo(formData.name, formData.description);
   editProfileModal.close();
-  openEditForm.close();
-  profileEditModalFormValidator.toggleButtonState();
 }
 
 const editProfileModal = new PopupWithForm(
@@ -69,8 +58,8 @@ const editProfileModal = new PopupWithForm(
 /* ----------------------- */
 
 function handleAddCardFormSubmit(formData) {
-  const cards = getCard({ name: formData.name, link: formData.url });
-  cardSection.addItem(cards);
+  const card = getCard({ name: formData.name, link: formData.url });
+  cardSection.addItem(card);
   addCardModal.close();
   // addCardEditForm.reset();
   // addCardFormValidator.toggleButtonState();
@@ -115,10 +104,6 @@ previewImageModal.setEventListeners();
 function handleImagePreview(cardData) {
   previewImageModal.open(cardData.name, cardData.link);
 } // it needs name and link to display image on preview
-
-previewImageModalCloseButton.addEventListener("click", () => {
-  previewImageModal.close();
-});
 
 /* ----------------------- */
 /*     Form Validation     */
