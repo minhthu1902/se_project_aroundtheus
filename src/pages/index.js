@@ -37,9 +37,9 @@ const profileUserInfo = new UserInfo({
 
 profileEditButton.addEventListener("click", () => {
   const user = profileUserInfo.getUserInfo();
+  profileEditModalFormValidator.resetValidation();
   profileTitleInput.value = user.profileTitle;
   profileDescriptionInput.value = user.profileDescription;
-  profileEditModalFormValidator.resetValidation();
   editProfileModal.open();
 });
 
@@ -61,8 +61,6 @@ function handleAddCardFormSubmit(formData) {
   const card = getCard({ name: formData.name, link: formData.url });
   cardSection.addItem(card);
   addCardModal.close();
-  // addCardEditForm.reset();
-  // addCardFormValidator.toggleButtonState();
 }
 
 function getCard(cardData) {
