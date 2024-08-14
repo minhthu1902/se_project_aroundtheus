@@ -1,12 +1,15 @@
+import Api from "../components/Api.js";
 import Popup from "../components/Popup.js";
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import "./index.css";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import {
+  authorizationCode,
   initialCards,
   cardData,
   cardsListEl,
@@ -18,10 +21,11 @@ import {
   editProfileForm,
   previewImageModalCloseButton,
   options,
-  cardTemplate,
+  cardSelector,
   profileTitleInput,
   profileDescriptionInput,
 } from "../utils/constants.js";
+import { data } from "autoprefixer";
 
 /* ----------------------- */
 /*     Profile Edit        */
@@ -33,7 +37,18 @@ const profileEditModalFormValidator = new FormValidator(
 const profileUserInfo = new UserInfo({
   profileTitleSelector: ".profile__title",
   profileDescriptionSelector: ".profile__description",
+  profileAvatarSelector: ".profile__image"
 });
+// fetch profile and set user info and avatar
+api.getProfile().then((data) => {
+  console.log('Profile data fetched:', data);
+  profileUserInfo.setUserInfo(data.name, data.about);
+
+  profileUserInfo.setUserAvatar(data.avatar);
+})
+.catch((err) => console.error('Error fetching profile:', err));
+
+
 
 profileEditButton.addEventListener("click", () => {
   const user = profileUserInfo.getUserInfo();
@@ -44,8 +59,13 @@ profileEditButton.addEventListener("click", () => {
 });
 
 function handleProfileEditSubmit(formData) {
-  profileUserInfo.setUserInfo(formData.name, formData.description);
+
+  //project 9
+  api.patchProfile(formData.name, formData.description).then((data) => {
+    profileUserInfo.setUserInfo(data.name, data.about);
+  // profileUserInfo.setUserInfo(formData.name, formData.description);
   editProfileModal.close();
+  }).catch((err)=> console.error(err));
 }
 
 const editProfileModal = new PopupWithForm(
@@ -103,23 +123,53 @@ function handleImagePreview(cardData) {
   previewImageModal.open(cardData.name, cardData.link);
 } // it needs name and link to display image on preview
 
-/* ----------------------- */
-/*     Form Validation     */
-/* ----------------------- */
-// const formValidators = {};
 
-// const enableValidation = (options) => {
-//   const formList = Array.from(document.querySelectorAll(options.formSelector));
-//   formList.forEach((formElement) => {
-//     const validator = new FormValidator(formElement, options);
-//     const formName = formElement.getAttribute("name");
-//     formValidators[formName] = validator;
-//     validator.enableValidation();
-//   });
-// };
-// enableValidation(options);
 
 //Initialization
 profileEditModalFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 cardSection.renderItems();
+
+/*---------------------------------------------------*/
+/*                      Api                          */
+/*---------------------------------------------------*/
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: authorizationCode,
+  },
+});
+api.getProfile().then(data => {
+  console.log('Profile Data:', data);
+  profileUserInfo.setUserInfo(data.name, data.about);
+}).catch(err => console.error('Error fetching profile:', err));
+
+api.getCards().then(cards => {
+  console.log('Cards Data:', cards);
+  cards.forEach(cardItem => 
+    {
+      const aCard = new Card(cardItem, '#card-template', handleImageClick);
+      document.querySelector('.cards__list').appendChild(aCard.getNewCard());
+   });
+  })
+.catch(err => console.error("Error fetching cards:", err));
+const handleImageClick = ({ name, link}) => {
+  console.log('Image Click:', name, link);
+};
+// const profileApiObject = api.getProfile()
+// profileApiObject.then((data) => {
+//   UserInfo.setUserInfo(data.name, data.link);
+//   avatarPopup.handleProfileEditSubmit(data.avatar)
+// })
+
+/*---------------------------------------------------*/
+/*               Section Constructor                 */
+/*---------------------------------------------------*/
+
+const uniqueCards = getCard();
+
+const section = new Section(
+  { items: uniqueCards, renderer: createCard }, ".cards__list"
+);
+section.renderItems();
