@@ -68,7 +68,7 @@ export const previewImageTitle = document.querySelector("#preview-title");
 export const previewImageModalCloseButton = document.querySelector(
   "#preview-modal-close-button"
 );
-export const cardSelector = document.querySelector("#card-template");
+export const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
 //content.firstElementChild;
 export const editProfileForm = document.querySelector("#edit-profile-form");
 //Validation options

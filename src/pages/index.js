@@ -21,7 +21,7 @@ import {
   editProfileForm,
   previewImageModalCloseButton,
   options,
-  cardSelector,
+  cardTemplate,
   profileTitleInput,
   profileDescriptionInput,
 } from "../utils/constants.js";
@@ -140,12 +140,12 @@ const api = new Api({
     authorization: authorizationCode,
   },
 });
-api.getProfile().then(data => {
+api.getInitialCards().then(data => {
   console.log('Profile Data:', data);
   profileUserInfo.setUserInfo(data.name, data.about);
 }).catch(err => console.error('Error fetching profile:', err));
 
-api.getCards().then(cards => {
+api.getInitialCards().then(cards => {
   console.log('Cards Data:', cards);
   cards.forEach(cardItem => 
     {
@@ -167,7 +167,7 @@ const handleImageClick = ({ name, link}) => {
 /*               Section Constructor                 */
 /*---------------------------------------------------*/
 
-const uniqueCards = getCard();
+const uniqueCards = getInitialCards();
 
 const section = new Section(
   { items: uniqueCards, renderer: createCard }, ".cards__list"

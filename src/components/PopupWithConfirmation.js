@@ -1,9 +1,9 @@
 import Popup from "./Popup";
 export default class PopupWithConfirmation extends Popup {
-  constructor(popupSelector, handleDelete) {
-    super({ popupSelector });
+  constructor(modalSelector, handleDelete) {
+    super({ modalSelector });
 
-    this._popupSelector = popupSelector;
+    this._modalSelector = modalSelector;
     this._handleDelete = handleDelete;
   }
 
@@ -13,7 +13,7 @@ export default class PopupWithConfirmation extends Popup {
   }
 
   setEventListeners(data) {
-    this.trashModal = document.querySelector(`${this._popupSelector}`);
+    this.trashModal = document.querySelector(`${this._modalSelector}`);
     this.trashModalSubmitButton = this.trashModal.querySelector(
       "#modal-button-trash"
     );

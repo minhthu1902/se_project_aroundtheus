@@ -73,7 +73,7 @@ export default class Api {
     }
     //CARD ROUTES
     // get all cards
-    async getCards() {
+    async getInitialCards() {
       return fetch(this._baseUrl + "/cards", 
         {
             method: "GET",
