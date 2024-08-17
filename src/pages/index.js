@@ -25,11 +25,16 @@ import {
   profileTitleInput,
   profileDescriptionInput,
 } from "../utils/constants.js";
-import { data } from "autoprefixer";
-
 /* ----------------------- */
 /*     Profile Edit        */
 /* ----------------------- */
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: authorizationCode,
+  },
+});
 const profileEditModalFormValidator = new FormValidator(
   editProfileForm,
   options
@@ -134,29 +139,19 @@ cardSection.renderItems();
 /*                      Api                          */
 /*---------------------------------------------------*/
 
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: authorizationCode,
-  },
-});
-api.getInitialCards().then(data => {
+api.getProfile().then(data => {
   console.log('Profile Data:', data);
   profileUserInfo.setUserInfo(data.name, data.about);
 }).catch(err => console.error('Error fetching profile:', err));
 
 api.getInitialCards().then(cards => {
   console.log('Cards Data:', cards);
-  cards.forEach(cardItem => 
-    {
-      const aCard = new Card(cardItem, '#card-template', handleImageClick);
-      document.querySelector('.cards__list').appendChild(aCard.getNewCard());
-   });
+  cardSection.renderItems(cards);
   })
-.catch(err => console.error("Error fetching cards:", err));
-const handleImageClick = ({ name, link}) => {
-  console.log('Image Click:', name, link);
-};
+  .catch((err) => {console.error("Error fetching cards:", err);
+});
+
+
 // const profileApiObject = api.getProfile()
 // profileApiObject.then((data) => {
 //   UserInfo.setUserInfo(data.name, data.link);
@@ -166,10 +161,3 @@ const handleImageClick = ({ name, link}) => {
 /*---------------------------------------------------*/
 /*               Section Constructor                 */
 /*---------------------------------------------------*/
-
-const uniqueCards = getInitialCards();
-
-const section = new Section(
-  { items: uniqueCards, renderer: createCard }, ".cards__list"
-);
-section.renderItems();
