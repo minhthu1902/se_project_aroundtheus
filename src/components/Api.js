@@ -26,7 +26,7 @@ export default class Api {
         .catch((err) => console.error(err));
     }
 
-    async patchProfileAvatar(link) {
+    async patchProfileAvatar(newLink) {
       return fetch(this._baseUrl + "/users/me/avatar", {
         method: "PATCH",
         headers: {
@@ -34,7 +34,7 @@ export default class Api {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          avatar: link,
+          userAvatar: newLink,
         }),
       })
         .then((res) => {
@@ -87,19 +87,19 @@ export default class Api {
               return res.json();
             return Promise.reject(`Error getting initial cards: ${res.status}`);
         })
-        .then((result) => {
-          const cardIds = new Set();
-          const uniqueCards = result.filter(({ name}) => {
-            if (!uniqueCards.has(name)) {
-              cardIds.add(name);
-              return true;
-            }
-            return false;
-          });
-          return uniqueCards;
-        })
-        .catch((err) => {console.error("GET Card Error", err);
-        });
+        // .then((result) => {
+        //   const cardIds = new Set();
+        //   const uniqueCards = result.filter(({ name}) => {
+        //     if (!uniqueCards.has(name)) {
+        //       cardIds.add(name);
+        //       return true;
+        //     }
+        //     return false;
+        //   });
+        //   return uniqueCards;
+        // })
+        // .catch((err) => {console.error("GET Card Error", err);
+        // });
     }
     //create new card
     async postCards(card) {

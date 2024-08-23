@@ -156,12 +156,48 @@
         <h2 class="modal__preview-title"></h2>
       </div>
     </div>
+
+    <!--Delete Image Modal-->
+    <div class="modal" id="delete-modal">
+      <div class="modal__content">
+        <button
+          class="modal__close"
+          id="delete-card-modal"
+          type="'button"></button>
+        <form class="moda__form modal__form_delete"
+              id="delete-modal-form">
+            <h2 class="modal__heading">Are you sure?</h2>
+            <button class="modal__button" type="submit">Yes</button>
+        </form>
+
+      </div>
+    </div>
+    <!--Edit avatar-->
+    <div class="modal" id ="edit-avatar-modal">
+      <div class="modal__content">
+        <button class="modal__close" type="button"></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+          <form class="modal__form"
+              id="edit-avatar-form"
+              name="edit-avatar-form">
+            <input type = "url"
+                  id = "avatar-url"
+                  name="avatar"
+                  class="modal__form-input"
+                  required
+            />
+            <span class="modal__error" id="avatar-url-error"></span>
+            <button class="modal__button" type="submit">Save</button>
+            </form>
+        </div>
+      </div>
     <!-- template card -->
     <template id="card-template">
       <!--shortcut template#card-template-->
       <li class="card">
         <img src="#" class="card__image" alt="#" />
-        <button class="card__delete-button" type="button"></button>
+        <button class="card__delete-button" type="button" id="card__remove-button">
+        </button>
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button
@@ -172,6 +208,5 @@
         </div>
       </li>
     </template>
-    <!-- <script src="../src/pages/index.js" defer></script> -->
   </body>
 </html>

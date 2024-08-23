@@ -63,14 +63,17 @@ profileEditButton.addEventListener("click", () => {
   editProfileModal.open();
 });
 
-function handleProfileEditSubmit(formData) {
+function handleProfileEditSubmit({name, description}) {
+  editProfileModal.setLoading(true);
+  api.patchProfile({name,description}).then((userData) => {
+    console.log(userData);
+    UserInfo.setUserInfo(userData);
+    editProfileModal.close();
+  }).catch((err)=> {
+    console.error(err);
+  }).finally(() =>{ editProfileModal.setLoading(false);
 
-  //project 9
-  api.patchProfile(formData.name, formData.description).then((data) => {
-    profileUserInfo.setUserInfo(data.name, data.about);
-  // profileUserInfo.setUserInfo(formData.name, formData.description);
-  editProfileModal.close();
-  }).catch((err)=> console.error(err));
+  });
 }
 
 const editProfileModal = new PopupWithForm(
@@ -82,10 +85,11 @@ const editProfileModal = new PopupWithForm(
 /*     ADD CARD            */
 /* ----------------------- */
 
-function handleAddCardFormSubmit(formData) {
+function handleAddCardFormSubmit({formData}) {
   const card = getCard({ name: formData.name, link: formData.url });
   cardSection.addItem(card);
   addCardModal.close();
+  
 }
 
 function getCard(cardData) {
@@ -114,6 +118,29 @@ const addCardModal = new PopupWithForm(
   "#add-card-modal",
   handleAddCardFormSubmit
 );
+/* ----------------------- */
+/*       Avatar           */
+/* ----------------------*/
+
+const handleAvatarSubmit = ({ userAvatar}) =>{
+  console.log(userAvatar);
+  editAvatarPopup.setLoading(true);
+  api.updateAvatar(userAvatar)
+  .then((data) => {
+    UserInfo.setUserAvatar(data.userAvatar);
+    editAvatarPopup.close();
+    FormValidator["edit-avatar-form"].toggleButtonState();
+  }).catch((err)=> {
+    console.error(err);
+  })
+  .finally(()=>{
+    editAvatarPopup.setLoading(false);
+  });
+};
+
+const editAvatarPopup = new PopupWithForm("#edit-avatar-modal", handleAvatarSubmit);
+editAvatarPopup.setEventListeners();
+
 
 /* ----------------------- */
 /*     Image Preview      */
@@ -135,14 +162,17 @@ profileEditModalFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 cardSection.renderItems();
 
-/*---------------------------------------------------*/
-/*                      Api                          */
-/*---------------------------------------------------*/
+/*-----------------*/
+/*       Api      */
+/*---------------*/
 
 api.getProfile().then(data => {
   console.log('Profile Data:', data);
-  profileUserInfo.setUserInfo(data.name, data.about);
-}).catch(err => console.error('Error fetching profile:', err));
+  UserInfo.setUserInfo(data);
+  UserInfo.setUserAvatar(data.userAvatar);
+}).catch(err => {
+  console.error(err);
+});
 
 api.getInitialCards().then(cards => {
   console.log('Cards Data:', cards);
@@ -150,14 +180,3 @@ api.getInitialCards().then(cards => {
   })
   .catch((err) => {console.error("Error fetching cards:", err);
 });
-
-
-// const profileApiObject = api.getProfile()
-// profileApiObject.then((data) => {
-//   UserInfo.setUserInfo(data.name, data.link);
-//   avatarPopup.handleProfileEditSubmit(data.avatar)
-// })
-
-/*---------------------------------------------------*/
-/*               Section Constructor                 */
-/*---------------------------------------------------*/
