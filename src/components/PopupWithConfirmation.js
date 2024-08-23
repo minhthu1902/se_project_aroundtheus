@@ -22,20 +22,7 @@ export default class PopupWithConfirmation extends Popup {
       this._modalButton.textContent = "Yes";
     }
   }
-  // setEventListeners(data) {
-  //   this.trashModal = document.querySelector(`${this._modalSelector}`);
-  //   this.trashModalSubmitButton = this.trashModal.querySelector(
-  //     "#modal-button-trash"
-  //   );
 
-  //   this.cardTitle = data.cardElement.querySelector(".card__title");
-
-  //   this.trashModal.addEventListener("submit", (e) => {
-  //     e.preventDefault();
-  //     this._handleFormSubmit(this.cardTitle);
-  //     this._removeCard(data.cardElement);
-  //   });
-  // }
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener("submit", (evt) => {

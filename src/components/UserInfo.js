@@ -1,4 +1,4 @@
-export default class UserInfo {
+export default class userInfo {
   //pass in selector's as argument
   constructor({ 
     profileTitleSelector, profileDescriptionSelector,
@@ -16,14 +16,16 @@ export default class UserInfo {
     return {
       profileTitle: this._profileTitleElement.textContent,
       profileDescription: this._profileDescriptionElement.textContent,
-      profileAvatar: this._profileAvatarElement.src,
+      avatar: this._profileAvatarElement.src,
     };
   }
-  setUserInfo(userName, userDescription) {
-    this._profileTitleElement.textContent = userName;
-    this._profileDescriptionElement.textContent = userDescription;
+  setUserInfo(name, about) {
+    this._profileTitleElement.textContent = name;
+    this._profileDescriptionElement.textContent = about;
   }
-  setUserAvatar(userAvatar) {
-    this._profileAvatarElement.src = userAvatar;
+  setUserAvatar(avatar) {
+    if (this._profileAvatarElement) {
+      this._profileAvatarElement.src = avatar;
+    }
   }
 }

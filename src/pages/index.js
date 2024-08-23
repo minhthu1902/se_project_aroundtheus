@@ -4,7 +4,7 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import "./index.css";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
-import UserInfo from "../components/UserInfo.js";
+import userInfo from "../components/userInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
@@ -25,26 +25,50 @@ import {
   profileTitleInput,
   profileDescriptionInput,
 } from "../utils/constants.js";
-/* ----------------------- */
-/*     Profile Edit        */
-/* ----------------------- */
 
+
+/*-----------------*/
+/*       Api      */
+/*---------------*/
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
     authorization: authorizationCode,
   },
 });
-const profileEditModalFormValidator = new FormValidator(
-  editProfileForm,
-  options
-);
-const profileUserInfo = new UserInfo({
+
+const profileUserInfo = new userInfo({
   profileTitleSelector: ".profile__title",
   profileDescriptionSelector: ".profile__description",
   profileAvatarSelector: ".profile__image"
 });
-// fetch profile and set user info and avatar
+
+api.getProfile().then((data) => {
+  console.log('Profile Data:', data);
+profileUserInfo.setUserInfo(data.name, data.about);
+profileUserInfo.setUserAvatar(data.avatar);
+}).catch(err => {
+  console.error(err);
+});
+
+api.getInitialCards().then(cards => {
+  console.log(cards);
+  cardSection.renderItems(cards);
+  })
+  .catch((err) => {console.error("Error fetching cards:", err);
+});
+
+
+/* ----------------------- */
+/*     Profile Edit        */
+/* ----------------------- */
+
+const profileEditModalFormValidator = new FormValidator(
+  editProfileForm,
+  options
+);
+
+
 api.getProfile().then((data) => {
   console.log('Profile data fetched:', data);
   profileUserInfo.setUserInfo(data.name, data.about);
@@ -67,7 +91,7 @@ function handleProfileEditSubmit({name, description}) {
   editProfileModal.setLoading(true);
   api.patchProfile({name,description}).then((userData) => {
     console.log(userData);
-    UserInfo.setUserInfo(userData);
+    userInfo.setUserInfo(userData);
     editProfileModal.close();
   }).catch((err)=> {
     console.error(err);
@@ -75,11 +99,22 @@ function handleProfileEditSubmit({name, description}) {
 
   });
 }
+//pop up with form
+
+const addCardModal = new PopupWithForm(
+  "#add-card-modal",
+  handleAddCardFormSubmit
+);
 
 const editProfileModal = new PopupWithForm(
   "#profile-edit-modal",
   handleProfileEditSubmit
 );
+
+
+// editProfileModal.setEventListeners();
+// const deletePopup = new PopupWithConfirmation("#delete-modal");
+// deletePopup.setEventListeners();
 
 /* ----------------------- */
 /*     ADD CARD            */
@@ -89,7 +124,7 @@ function handleAddCardFormSubmit({formData}) {
   const card = getCard({ name: formData.name, link: formData.url });
   cardSection.addItem(card);
   addCardModal.close();
-  
+
 }
 
 function getCard(cardData) {
@@ -114,20 +149,17 @@ addNewCardButton.addEventListener("click", () => {
 
 const addCardFormValidator = new FormValidator(addCardEditForm, options);
 
-const addCardModal = new PopupWithForm(
-  "#add-card-modal",
-  handleAddCardFormSubmit
-);
+
 /* ----------------------- */
 /*       Avatar           */
 /* ----------------------*/
 
-const handleAvatarSubmit = ({ userAvatar}) =>{
-  console.log(userAvatar);
+const handleAvatarSubmit = ({ avatar}) =>{
+  console.log(avatar);
   editAvatarPopup.setLoading(true);
-  api.updateAvatar(userAvatar)
+  api.patchProfileAvatar(avatar)
   .then((data) => {
-    UserInfo.setUserAvatar(data.userAvatar);
+    userInfo.setUserAvatar(data.avatar);
     editAvatarPopup.close();
     FormValidator["edit-avatar-form"].toggleButtonState();
   }).catch((err)=> {
@@ -160,23 +192,5 @@ function handleImagePreview(cardData) {
 //Initialization
 profileEditModalFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
-cardSection.renderItems();
+// cardSection.renderItems();
 
-/*-----------------*/
-/*       Api      */
-/*---------------*/
-
-api.getProfile().then(data => {
-  console.log('Profile Data:', data);
-  UserInfo.setUserInfo(data);
-  UserInfo.setUserAvatar(data.userAvatar);
-}).catch(err => {
-  console.error(err);
-});
-
-api.getInitialCards().then(cards => {
-  console.log('Cards Data:', cards);
-  cardSection.renderItems(cards);
-  })
-  .catch((err) => {console.error("Error fetching cards:", err);
-});
