@@ -37,6 +37,7 @@ const api = new Api({
   },
 });
 
+
 const profileUserInfo = new userInfo({
   profileTitleSelector: ".profile__title",
   profileDescriptionSelector: ".profile__description",
@@ -51,7 +52,7 @@ profileUserInfo.setUserAvatar(data.avatar);
   console.error(err);
 });
 
-api.getInitialCards().then(cards => {
+api.getInitialCards().then((cards) => {
   console.log(cards);
   cardSection.renderItems(cards);
   })
@@ -187,10 +188,8 @@ function handleImagePreview(cardData) {
   previewImageModal.open(cardData.name, cardData.link);
 } // it needs name and link to display image on preview
 
-
-
 //Initialization
 profileEditModalFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
-// cardSection.renderItems();
+
 
