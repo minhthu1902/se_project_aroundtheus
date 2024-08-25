@@ -61,6 +61,7 @@ export const addCardEditForm = document.querySelector("#add-card-form");
 // const cardTitleInput = addCardEditForm.querySelector("#card-title-input");
 // const cardUrlInput = addCardEditForm.querySelector("#card-url-input");
 export const addCardModalCloseButton = document.querySelector(".modal__close");
+
 //Preview Image
 // const previewImageModal = document.querySelector("#preview-image-modal");
 export const previewImage = document.querySelector("#preview-image");
@@ -71,6 +72,13 @@ export const previewImageModalCloseButton = document.querySelector(
 export const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
 //content.firstElementChild;
 export const editProfileForm = document.querySelector("#edit-profile-form");
+
+//avatar
+export const avatarPictureButton = document.querySelector(".profile__edit-button");
+export const avatarEditModal= document.querySelector("#edit-avatar-modal");
+export const avatarEditForm = avatarEditModal.querySelector("#edit-avatar-form");
+
+
 //Validation options
 export const options = {
   formSelector: ".modal__form",
@@ -80,6 +88,7 @@ export const options = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
+
 export const authorizationCode = "a93eae64-e670-4bc7-86e7-6fe2158b62a7";
 // export {
 //   initialCards,

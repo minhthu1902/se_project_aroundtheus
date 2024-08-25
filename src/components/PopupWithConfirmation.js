@@ -2,7 +2,7 @@ import Popup from "./Popup";
 export default class PopupWithConfirmation extends Popup {
   constructor(modalSelector, handleFormSubmit) {
     super({ modalSelector });
-    this._modalSelector = modalSelector;
+    // this._modalSelector = modalSelector;
     this._handleFormSubmit = handleFormSubmit;
     this._modalButton = this._popupElement.querySelector(".modal__button");
   }

@@ -14,8 +14,20 @@
   background-position: center;
   margin-right: 24px;
 }
-
+.profile__image-edit-button{
+  background-color: black;
+  /* opacity: 0; */
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  border: none;
+}
+.profile__image-edit-button:hover {
+  opacity: 0.5s;
+  cursor: pointer;
+}
 .profile__info {
+  margin-left: 20px;
   display: grid;
   grid-gap: 7px 17px;
   align-items: center;

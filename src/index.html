@@ -21,11 +21,12 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
+          <button class="profile__image-edit-button">
+            <img
             src="<%=require('./images/jacques-cousteau-1.jpg')%>"
             alt="Avatar"
-            class="profile__image"
-          />
+            class="profile__image"/>
+          </button>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
@@ -41,7 +42,6 @@
             type="button"
           ></button>
         </section>
-
         <section class="cards page__section">
           <ul class="cards__list" id="cards-container"></ul>
         </section>
@@ -148,7 +148,7 @@
         ></button>
 
         <img
-          src="#"
+          src=""
           alt="Preview Image"
           class="modal__preview-image"
           id="preview-image"
@@ -181,8 +181,8 @@
               id="edit-avatar-form"
               name="edit-avatar-form">
             <input type = "url"
-                  id = "avatar-url"
-                  name="avatar"
+                  id = "avatar-url-input"
+                  name="avatarUrl"
                   class="modal__form"
                   required
             />
