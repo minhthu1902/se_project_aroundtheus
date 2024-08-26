@@ -178,15 +178,16 @@
         <button class="modal__close" type="button"></button>
         <h2 class="modal__heading">Change profile picture</h2>
           <form class="modal__form"
-              id="edit-avatar-form"
+              id="avatar-modal-form"
               name="edit-avatar-form">
             <input type = "url"
                   id = "avatar-url-input"
                   name="avatarUrl"
                   class="modal__input"
+                  placeholder="Image URL"
                   required
             />
-            <span class="modal__error" id="avatar-url-error"></span>
+            <span class="modal__input-error" id="avatar-url-error"></span>
             <button class="modal__button" type="submit">Save</button>
             </form>
         </div>

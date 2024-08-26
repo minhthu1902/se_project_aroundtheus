@@ -3,13 +3,13 @@ export default class FormValidator {
     this._formElement = formElement;
     this._formSelector = options.formSelector;
     this._inputSelector = options.inputSelector;
-    // this.inputList = Array.from(
-    //   this._formElement.querySelectorAll(this._inputSelector)
-    // );
+    this.inputList = Array.from(
+      this._formElement.querySelectorAll(this._inputSelector));
     this._submitButtonSelector = options.submitButtonSelector;
     this._inactiveButtonClass = options.inactiveButtonClass;
     this._inputErrorClass = options.inputErrorClass;
     this._errorClass = options.errorClass;
+    this._ButtonElement = this._formElement.querySelector(this._submitButtonSelector);
   }
 
   _checkInputValidity(inputElement) {
@@ -20,13 +20,15 @@ export default class FormValidator {
     }
   }
 
-  _showInputError(inputElement) {
+  _showInputError(inputElement, errorMessage) {
     const errorMessageEl = this._formElement.querySelector(
       `#${inputElement.id}-error`
     );
     inputElement.classList.add(this._inputErrorClass);
-    errorMessageEl.textContent = inputElement.validationMessage; //get validation message
-    inputElement.classList.add(this._errorClass); //add error class and display error message
+    errorMessageEl.textContent = errorMessage; //get validation message
+
+    errorMessageEl.classList.add(this._errorClass);
+    // inputElement.classList.add(this._errorClass); //add error class and display error message
   }
 
   _hideInputError(inputElement) {

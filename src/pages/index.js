@@ -91,7 +91,7 @@ const previewImageModal = new PopupWithImage({
   modalSelector:"#preview-image-modal",});
 previewImageModal.setEventListeners();
 
-const deleteAvatarPopup = new PopupWithConfirmation("#avatar-modal");
+const deleteAvatarPopup = new PopupWithConfirmation("#delete-modal");
 deleteAvatarPopup.setEventListeners();
 
 /* ------------------- */
