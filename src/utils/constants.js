@@ -75,7 +75,7 @@ export const editProfileForm = document.querySelector("#edit-profile-form");
 
 //avatar
 export const avatarPictureButton = document.querySelector(".profile__edit-button");
-export const avatarEditModal= document.querySelector("#edit-avatar-modal");
+export const avatarEditModal= document.querySelector("#avatar-modal");
 export const avatarEditForm = avatarEditModal.querySelector("#edit-avatar-form");
 
 

@@ -39,9 +39,6 @@ const api = new Api({
   },
 });
 
-
-
-
 api.getProfile().then((data) => {
   console.log('Profile Data:', data);
 profileUserInfo.setUserInfo(data.name, data.about);
@@ -57,17 +54,6 @@ api.getInitialCards().then((cards) => {
   .catch((err) => {console.error("Error fetching cards:", err);
 });
 
-
-/* ----------------------- */
-/*     Profile Edit        */
-/* ----------------------- */
-
-const profileEditModalFormValidator = new FormValidator(
-  editProfileForm,
-  options
-);
-
-
 api.getProfile().then((data) => {
   console.log('Profile data fetched:', data);
   profileUserInfo.setUserInfo(data.name, data.about);
@@ -82,12 +68,10 @@ const profileUserInfo = new userInfo({
   profileAvatarSelector: ".profile__image"
 });
 
-const addCardModal = new PopupWithForm( "#add-card-modal", handleAddCardFormSubmit
-);
+const addCardModal = new PopupWithForm( "#add-card-modal", handleAddCardFormSubmit);
 addCardModal.setEventListeners();
 
-const editProfileModal = new PopupWithForm("#profile-edit-modal", handleProfileEditSubmit
-);
+const editProfileModal = new PopupWithForm("#profile-edit-modal", handleProfileEditSubmit);
 editProfileModal.setEventListeners();
 
 const createCard = (item) => {
@@ -100,19 +84,30 @@ const cardSection = new Section(
   ".cards__list"
 );
 
-const editAvatarPopup = new PopupWithForm("#edit-avatar-modal", handleAvatarSubmit
-);
+const editAvatarPopup = new PopupWithForm("#avatar-modal", handleAvatarSubmit);
 editAvatarPopup.setEventListeners();
+
+const previewImageModal = new PopupWithImage({
+  modalSelector:"#preview-image-modal",});
+previewImageModal.setEventListeners();
+
+const deleteAvatarPopup = new PopupWithConfirmation("#avatar-modal");
+deleteAvatarPopup.setEventListeners();
+
+/* ------------------- */
+/*     Validation     */
+/* ----------------- */
 
 const addCardFormValidator = new FormValidator(addCardEditForm, options);
 
 const avatarFormValidator = new FormValidator(avatarEditForm, options);
 
-const previewImageModal = new PopupWithImage("#preview-image-modal");
-previewImageModal.setEventListeners();
+const profileEditModalFormValidator = new FormValidator( editProfileForm, options); 
 
-const deleteAvatarPopup = new PopupWithConfirmation("#delete-modal", handleAvatarSubmit);
-deleteAvatarPopup.setEventListeners();
+//Initialization
+profileEditModalFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 /* ----------------------- */
 /*     Add event listener  */
@@ -141,7 +136,7 @@ avatarPictureButton.addEventListener("click", () => {
 
 
 function handleProfileEditSubmit({name, description}) {
-  editProfileModal.setLoading(true);
+  editProfileModal.setLoading(true, "Saving...");
   api.patchProfile({name,description}).then((userData) => {
     console.log(userData);
     userInfo.setUserInfo(userData);
@@ -185,8 +180,5 @@ function handleImagePreview(cardData) {
 
 
 
-//Initialization
-profileEditModalFormValidator.enableValidation();
-addCardFormValidator.enableValidation();
-avatarFormValidator.enableValidation();
+
 
