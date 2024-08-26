@@ -5,9 +5,9 @@ export default class PopupWithForm extends Popup {
     super({ modalSelector }); //add-card-modal
     this._form = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
-    this._inputList = this._form.querySelector(".modal__input");
+    this._inputList = this._form.querySelectorAll(".modal__input");
     this.setEventListeners();
-    // this._modalButton = this._popupElement.querySelector("modal__button");
+    this._modalButton = this._popupElement.querySelector(".modal__button");
   }
 
   close() {
@@ -28,23 +28,27 @@ export default class PopupWithForm extends Popup {
       input.value = data[input.name];
     });
   }
-
-  setLoading(isLoading) {
-    if (isLoading) {
-      this._modalButton.textContent = "Saving...";
+  setLoading(isLoading, loadingText = "Saving...") {
+    if (this._modalButton) {
+      if (isLoading) {
+        this._modalButton.textContent = loadingText;
+      } else {
+        this._modalButton.textContent = this._modalButton.dataset.originalText || "Save";
+      }
     } else {
-      this._modalButton.textContent = "Save";
+      console.error("Submit button not found.");
     }
   }
+
   setEventListeners() {
     this._form.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._handleFormSubmit(this.getInputValues());
+    this._handleFormSubmit(this._getInputValues());
     });
     super.setEventListeners();
   }
 
-  getNewForm() {
-    return this._form;
-  }
+  // getNewForm() {
+  //   return this._form;
+  // }
 }

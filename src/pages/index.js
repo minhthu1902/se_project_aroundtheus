@@ -158,21 +158,21 @@ function getCard(cardData) {
   return cardElement.getNewCard();
 }
 
-function handleAvatarSubmit({avatar}){
-  console.log(avatar);
+function handleAvatarSubmit({ avatarUrl }){
+  console.log(avatarUrl);
   editAvatarPopup.setLoading(true, "Saving...");
-  api.patchProfileAvatar(avatar)
+  api.patchProfileAvatar(avatarUrl)
   .then((data) => {
-    userInfo.setUserAvatar(data.avatar);
+    profileUserInfo.setUserAvatar(data.avatar);
     editAvatarPopup.close();
-    FormValidator["edit-avatar-form"].toggleButtonState();
-  }).catch((err)=> {
-    console.error(err);
+    // FormValidator["edit-avatar-form"].toggleButtonState();
   })
   .finally(()=>{
     editAvatarPopup.setLoading(false);
-  });
-};
+  }).catch((err)=> {
+    console.error(err);
+  })
+}
 
 function handleImagePreview(cardData) {
   previewImageModal.open(cardData.name, cardData.link);
