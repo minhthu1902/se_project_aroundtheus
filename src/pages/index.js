@@ -136,15 +136,18 @@ avatarPictureButton.addEventListener("click", () => {
 
 
 function handleProfileEditSubmit({name, description}) {
+  //name and description have to match the name of profile edit form input name
   editProfileModal.setLoading(true, "Saving...");
-  api.patchProfile({name,description}).then((userData) => {
+  api.patchProfile(name, description).then((userData) => {
     console.log(userData);
-    userInfo.setUserInfo(userData);
+    profileUserInfo.setUserInfo(userData.name,userData.about);
     editProfileModal.close();
-  }).catch((err)=> {
+  }).finally(() =>{ 
+    editProfileModal.setLoading(false);
+  })
+  .catch((err)=> {
     console.error(err);
-  }).finally(() =>{ editProfileModal.setLoading(false);
-  });
+  })
 }
 function handleAddCardFormSubmit({formData}) {
   const card = getCard({ name: formData.name, link: formData.url });
