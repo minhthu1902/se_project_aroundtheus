@@ -1,9 +1,19 @@
 export default class Card {
-  constructor({ name, link }, cardSelector, handleImageClick) {
+  constructor({ name, link, id, isLiked }, cardSelector, 
+  handleImageClick, 
+
+  ) {
     this._name = name;
     this._link = link;
+    this._id = id;
+    this._isLiked = isLiked;
     this._handleImageClick = handleImageClick;
     this._cardSelector = cardSelector;
+    this._handleImageClick = handleImageClick;
+
+  }
+  getId(){
+    return this._id;
   }
   _getTemplate() {
     return document
@@ -11,6 +21,10 @@ export default class Card {
       .content.querySelector(".card")
       .cloneNode(true);
   }
+  // _setCardLike(isLiked){
+  //   this._isLiked = isLiked;
+  //   this._handleLikeIcon();
+  // }
   _handleLikeIcon() {
     this._likeButton.classList.toggle("card__like-button-active");
   }

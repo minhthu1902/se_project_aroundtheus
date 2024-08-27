@@ -102,7 +102,8 @@ export default class Api {
         // });
     }
     //create new card
-    async postCards(card) {
+    async postCards(name, link) {
+      console.log('Sending data:', { name, link });
         return fetch(`${this._baseUrl}/cards`, {
             method: "POST",
             headers: 
@@ -110,15 +111,13 @@ export default class Api {
                 authorization: this._headers.authorization,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                name: card.name,
-                link: card.link,
-            }),
+            body: JSON.stringify({ name, link }),
         })
         .then((res) => {
           if (res.ok) return res.json();
           return Promise.reject(`Error: ${res.status}`);
         }). then ((result) => {
+          console.log('Card created successfully:', result);
           return result;
         })
         .catch((err) => {

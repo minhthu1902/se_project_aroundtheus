@@ -140,7 +140,7 @@ function handleProfileEditSubmit({name, description}) {
   editProfileModal.setLoading(true, "Saving...");
   api.patchProfile(name, description).then((userData) => {
     console.log(userData);
-    profileUserInfo.setUserInfo(userData.name,userData.about);
+    profileUserInfo.setUserInfo(userData.name, userData.about);
     editProfileModal.close();
   }).finally(() =>{ 
     editProfileModal.setLoading(false);
@@ -149,10 +149,21 @@ function handleProfileEditSubmit({name, description}) {
     console.error(err);
   })
 }
-function handleAddCardFormSubmit({formData}) {
-  const card = getCard({ name: formData.name, link: formData.url });
-  cardSection.addItem(card);
-  addCardModal.close();
+function handleAddCardFormSubmit({name, url}) {
+  
+  addCardModal.setLoading(true,"Saving...");
+  api.postCards(name, url).then((cardData) => {
+    console.log(cardData);
+    const card = getCard(cardData);
+    addCardFormValidator.toggleButtonState();
+    cardSection.addItem(card);
+    addCardModal.close();
+
+  }).finally(() => {
+    addCardModal.setLoading(false);
+  }).catch((err) => {
+    console.error(err);
+  })
 
 }
 

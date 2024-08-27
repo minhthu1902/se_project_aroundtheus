@@ -90,10 +90,4 @@ export const options = {
 };
 
 export const authorizationCode = "a93eae64-e670-4bc7-86e7-6fe2158b62a7";
-// export {
-//   initialCards,
-//   cardsListEl,
-//   options,
-//   profileTitleInput,
-//   profileDescriptionInput,
-// };
+
