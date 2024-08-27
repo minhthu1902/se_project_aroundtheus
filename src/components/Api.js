@@ -87,19 +87,6 @@ export default class Api {
               return res.json();
             return Promise.reject(`Error getting initial cards: ${res.status}`);
         })
-        // .then((result) => {
-        //   const cardIds = new Set();
-        //   const uniqueCards = result.filter(({ name}) => {
-        //     if (!uniqueCards.has(name)) {
-        //       cardIds.add(name);
-        //       return true;
-        //     }
-        //     return false;
-        //   });
-        //   return uniqueCards;
-        // })
-        // .catch((err) => {console.error("GET Card Error", err);
-        // });
     }
     //create new card
     async postCards(name, link) {

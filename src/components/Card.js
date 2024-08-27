@@ -9,12 +9,11 @@ export default class Card {
     this._isLiked = isLiked;
     this._handleImageClick = handleImageClick;
     this._cardSelector = cardSelector;
-    this._handleImageClick = handleImageClick;
 
   }
-  getId(){
-    return this._id;
-  }
+  // getId(){
+  //   return this._id;
+  // }
   _getTemplate() {
     return document
       .querySelector(this._cardSelector)
