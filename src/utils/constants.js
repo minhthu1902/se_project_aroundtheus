@@ -34,10 +34,12 @@ export const initialCards = [
     alt: "Lago di Braies",
   },
 ];
+
 export const cardData = {
   name: "Yosemite Valley",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
+
 //templates and button
 export const cardsListEl = document.querySelector(".cards__list");
 export const profileEditButton = document.querySelector(

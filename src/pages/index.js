@@ -39,16 +39,9 @@ const api = new Api({
   },
 });
 
-// api.getProfile().then((data) => {
-//   console.log('Profile Data:', data);
-// profileUserInfo.setUserInfo(data.name, data.about);
-// profileUserInfo.setUserAvatar(data.avatar);
-// }).catch(err => {
-//   console.error(err);
-// });
 
 api.getInitialCards().then((cards) => {
-  console.log(cards);
+  // console.log(cards);
   cardSection.renderItems(cards);
   })
   .catch((err) => {console.error("Error fetching cards:", err);
@@ -60,11 +53,6 @@ api.getProfile().then((data) => {
   profileUserInfo.setUserAvatar(data.avatar);
 })
 .catch((err) => console.error('Error fetching profile:', err));
-
-api.postCards().then((data) => {
-  console.log("Card data fetched", data);
-})
-
 
 //pop up with form
 const profileUserInfo = new userInfo({
