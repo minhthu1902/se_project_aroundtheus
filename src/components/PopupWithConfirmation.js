@@ -14,7 +14,7 @@ export default class PopupWithConfirmation extends Popup {
     card = null;
   }
   setSubmit(handleSubmit) {
-    this._handleFormSubmit=handleSubmit;
+    this._handleFormSubmit = handleSubmit;
   }
 
   setLoading(isLoading, text) {

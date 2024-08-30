@@ -67,13 +67,13 @@ addCardModal.setEventListeners();
 const editProfileModal = new PopupWithForm("#profile-edit-modal", handleProfileEditSubmit);
 editProfileModal.setEventListeners();
 
-const createCard = (item) => {
-  const newCard = getCard(item);
+const createCard = (items) => {
+  const newCard = getCard(items);
   cardSection.addItem(newCard);
 };
 
 const cardSection = new Section(
-  { items: initialCards, renderer: createCard },
+  { items: [], renderer: createCard },
   ".cards__list"
 );
 
@@ -98,13 +98,13 @@ const avatarFormValidator = new FormValidator(avatarEditForm, options);
 
 const profileEditModalFormValidator = new FormValidator(editProfileForm, options); 
 
-const deleteButtonSubmitValidator = new FormValidator("#delete-modal-form",options);
+// const deleteButtonSubmitValidator = new FormValidator("#delete-modal-form",options);
 
 //Initialization
 profileEditModalFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
-deleteButtonSubmitValidator.enableValidation();
+// deleteButtonSubmitValidator.enableValidation();
 
 /* ----------------------- */
 /*     Add event listener  */
@@ -128,10 +128,7 @@ avatarPictureButton.addEventListener("click", () => {
   avatarFormValidator.toggleButtonState();
 });
 
-// trashButton.addEventListener("click", () => {
-//   deleteButtonSubmit.open();
-//   deleteButtonSubmitValidator.toggleButtonState();
-// })
+
 /* ----------------------- */
 /*     function            */
 /* ----------------------- */
@@ -186,20 +183,26 @@ function handleAddCardFormSubmit({name, url}) {
 //   return cardElement.getNewCard();
 // }
  
-
-function getCard(cardData) {
+function getCard(items) {
   const cardElement = new Card(
-    cardData,
+    items,
     "#card-template",
     handleImagePreview,
-    handleImageClick,
-    handleCardDeleteSubmit,
+    handleDeleteClick,
     handleLikeClick,
   );
-  const card = cardElement.renderCard();
-  cardSection.addItem(card);
-  return cardElement.getNewCard();
+  const card = cardElement._renderCard();
+  
+  return cardElement.getNewCard(card);
 }
+function handleDeleteClick(items){
+  console.log(items);
+  deleteSubmitConfirmModal.open(items);
+}
+
+
+function handleLikeClick(items, isLiked, card, ) {}
+
 
 function handleAvatarSubmit({ avatarUrl }){
   console.log(avatarUrl);
@@ -208,7 +211,6 @@ function handleAvatarSubmit({ avatarUrl }){
   .then((data) => {
     profileUserInfo.setUserAvatar(data.avatar);
     editAvatarPopup.close();
-    // FormValidator["edit-avatar-form"].toggleButtonState();
   })
   .finally(()=>{
     editAvatarPopup.setLoading(false);
