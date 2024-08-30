@@ -42,7 +42,7 @@ export default class Card {
     return this._cardElement;
   }
 
-  _renderCard() {
+  renderCard() {
     this._cardTitle.textContent = this.name;
     this._cardImage.src = this.link;
     this._cardImage.alt = this.name;
@@ -70,7 +70,7 @@ export default class Card {
     this._likeButton = this._cardElement.querySelector(".card__like-button");
     this._cardImage = this._cardElement.querySelector(".card__image");
     this._trashButton = this._cardElement.querySelector(".card__delete-button");
-    this._renderCard();
+    this.renderCard();
     this._setEventListeners();
 
     return this._cardElement;

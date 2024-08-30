@@ -84,7 +84,7 @@ const previewImageModal = new PopupWithImage({
   modalSelector:"#preview-image-modal",});
 previewImageModal.setEventListeners();
 
-const deleteSubmitConfirmModal = new PopupWithConfirmation("#delete-modal", handleCardDeleteSubmit);
+const deleteSubmitConfirmModal = new PopupWithConfirmation("#avatar-modal", handleCardDeleteSubmit);
 deleteSubmitConfirmModal.setEventListeners();
 
 
@@ -98,13 +98,13 @@ const avatarFormValidator = new FormValidator(avatarEditForm, options);
 
 const profileEditModalFormValidator = new FormValidator(editProfileForm, options); 
 
-// const deleteButtonSubmitValidator = new FormValidator(deleteButtonSubmit,options);
+const deleteButtonSubmitValidator = new FormValidator("#delete-modal-form",options);
 
 //Initialization
 profileEditModalFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
-// deleteButtonSubmitValidator.enableValidation();
+deleteButtonSubmitValidator.enableValidation();
 
 /* ----------------------- */
 /*     Add event listener  */
@@ -169,10 +169,11 @@ function handleAddCardFormSubmit({name, url}) {
 
 }
 
-function getCard(cardData) {
-  const cardElement = new Card(cardData, "#card-template", handleImagePreview); //call out Card class with corresponding argument in Card class constructor
-  return cardElement.getNewCard();
-}
+// function getCard (cardData) {
+//   const cardElement = new Card(cardData, "#card-template", handleImagePreview); //call out Card class with corresponding argument in Card class constructor
+//   return cardElement.getNewCard();
+// }
+
 
 // const getCard = () => {
 //   const cardElement = new Card({
@@ -186,16 +187,19 @@ function getCard(cardData) {
 // }
  
 
-// function makeCard(cardData) {
-//   const cards = new Card(
-//     cardData,
-//     cardTemplate,
-//     handleImageClick,
-//     handleDeleteClick,
-//     handleCardLike
-//   );
-//   return cards.getNewCard();
-// }
+function getCard(cardData) {
+  const cardElement = new Card(
+    cardData,
+    "#card-template",
+    handleImagePreview,
+    handleImageClick,
+    handleCardDeleteSubmit,
+    handleLikeClick,
+  );
+  const card = cardElement.renderCard();
+  cardSection.addItem(card);
+  return cardElement.getNewCard();
+}
 
 function handleAvatarSubmit({ avatarUrl }){
   console.log(avatarUrl);

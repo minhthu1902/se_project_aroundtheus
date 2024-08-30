@@ -84,8 +84,8 @@ export const avatarEditForm = avatarEditModal.querySelector("#avatar-modal-form"
 /* ---------------------------------- */
 /*  Delete card confirmation form    */
 /* -------------------------------- */
-
-export const deleteButtonSubmit = document.querySelector("#delete-modal-form");
+export const deleteButton = document.querySelector(".card__delete-button");
+export const deleteButtonSubmit = deleteButton.querySelector("#delete-modal-form");
 
 //Validation options
 export const options = {
