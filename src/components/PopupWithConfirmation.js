@@ -9,10 +9,10 @@ export default class PopupWithConfirmation extends Popup {
 
   }
 
-  // _removeCard(card) {
-  //   card.remove();
-  //   card = null;
-  // }
+  _removeCard(card) {
+    card.remove();
+    card = null;
+  }
   setSubmit(handleSubmit) {
     this._handleFormSubmit=handleSubmit;
   }

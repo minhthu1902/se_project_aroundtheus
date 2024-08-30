@@ -20,6 +20,7 @@ import {
   addNewCardButton,
   addCardEditForm,
   addCardModalCloseButton,
+  deleteButtonSubmit,
   editProfileForm,
   previewImageModalCloseButton,
   options,
@@ -41,7 +42,6 @@ const api = new Api({
 
 
 api.getInitialCards().then((cards) => {
-  // console.log(cards);
   cardSection.renderItems(cards);
   })
   .catch((err) => {console.error("Error fetching cards:", err);
@@ -84,8 +84,9 @@ const previewImageModal = new PopupWithImage({
   modalSelector:"#preview-image-modal",});
 previewImageModal.setEventListeners();
 
-const deleteAvatarPopup = new PopupWithConfirmation("#delete-modal");
-deleteAvatarPopup.setEventListeners();
+const deleteSubmitConfirmModal = new PopupWithConfirmation("#delete-modal", handleCardDeleteSubmit);
+deleteSubmitConfirmModal.setEventListeners();
+
 
 /* ------------------- */
 /*     Validation     */
@@ -95,12 +96,15 @@ const addCardFormValidator = new FormValidator(addCardEditForm, options);
 
 const avatarFormValidator = new FormValidator(avatarEditForm, options);
 
-const profileEditModalFormValidator = new FormValidator( editProfileForm, options); 
+const profileEditModalFormValidator = new FormValidator(editProfileForm, options); 
+
+// const deleteButtonSubmitValidator = new FormValidator(deleteButtonSubmit,options);
 
 //Initialization
 profileEditModalFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 avatarFormValidator.enableValidation();
+// deleteButtonSubmitValidator.enableValidation();
 
 /* ----------------------- */
 /*     Add event listener  */
@@ -123,6 +127,11 @@ avatarPictureButton.addEventListener("click", () => {
   editAvatarPopup.open();
   avatarFormValidator.toggleButtonState();
 });
+
+// trashButton.addEventListener("click", () => {
+//   deleteButtonSubmit.open();
+//   deleteButtonSubmitValidator.toggleButtonState();
+// })
 /* ----------------------- */
 /*     function            */
 /* ----------------------- */
@@ -165,6 +174,29 @@ function getCard(cardData) {
   return cardElement.getNewCard();
 }
 
+// const getCard = () => {
+//   const cardElement = new Card({
+//     handleDeleteClick: (cardElement ) => {
+//       api.deleteCard(cardElement.getId()).then(() => {cardElement.deleteCard()}).catch((err)=> {
+//         console.error(err);
+//       })
+//     }  
+//   });
+//   return cardElement.getNewCard();
+// }
+ 
+
+// function makeCard(cardData) {
+//   const cards = new Card(
+//     cardData,
+//     cardTemplate,
+//     handleImageClick,
+//     handleDeleteClick,
+//     handleCardLike
+//   );
+//   return cards.getNewCard();
+// }
+
 function handleAvatarSubmit({ avatarUrl }){
   console.log(avatarUrl);
   editAvatarPopup.setLoading(true, "Saving...");
@@ -185,7 +217,20 @@ function handleImagePreview(cardData) {
   previewImageModal.open(cardData.name, cardData.link);
 } // it needs name and link to display image on preview
 
-
-
-
+//create a function that handle delete button modal
+function handleCardDeleteSubmit(card){
+  deleteSubmitConfirmModal.open();
+  deleteSubmitConfirmModal.setSubmit(()=> {
+    deleteSubmitConfirmModal.setLoading(true, "Deleting...");
+    api.deleteCard(card._id).then(() => {
+      console.log("Card deleted successfully");
+      card.handleDeleteCard();
+      deleteSubmitConfirmModal.close();
+    }). catch((err) => {
+      console.error(err);
+    }).finally(() => {
+      deleteSubmitConfirmModal.setLoading(false, "Yes");
+    });
+  });
+}
 

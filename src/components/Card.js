@@ -1,19 +1,25 @@
 export default class Card {
-  constructor({ name, link, id, isLiked }, cardSelector, 
-  handleImageClick, 
+  constructor({ name, link, _id, isLiked }, cardSelector, 
+  handleImageClick,
+  handleCardDeleteSubmit,
+  handleLikeClick,
+
 
   ) {
-    this._name = name;
-    this._link = link;
-    this._id = id;
+    this.name = name;
+    this.link = link;
+    this._id = _id;
     this._isLiked = isLiked;
     this._handleImageClick = handleImageClick;
     this._cardSelector = cardSelector;
-
+    this._handleCardDeleteSubmit = handleCardDeleteSubmit
+    this.handleLikeClick = handleLikeClick;
   }
-  // getId(){
-  //   return this._id;
-  // }
+
+  getId(){
+    return this._id;
+  }
+
   _getTemplate() {
     return document
       .querySelector(this._cardSelector)
@@ -24,33 +30,42 @@ export default class Card {
   //   this._isLiked = isLiked;
   //   this._handleLikeIcon();
   // }
+
   _handleLikeIcon() {
     this._likeButton.classList.toggle("card__like-button-active");
+    
   }
-  _handleDeleteCard() {
+
+  handleDeleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
+    return this._cardElement;
   }
 
   _renderCard() {
-    this._cardTitle.textContent = this._name;
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._name;
+    this._cardTitle.textContent = this.name;
+    this._cardImage.src = this.link;
+    this._cardImage.alt = this.name;
   }
+
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
       this._handleLikeIcon();
     });
     this._trashButton.addEventListener("click", () => {
-      this._handleDeleteCard();
+      this.handleDeleteCard();
     });
-
+    this._trashButton.addEventListener("click", () => {
+      this._handleCardDeleteSubmit(this);
+    }) 
     this._cardImage.addEventListener("click", () => {
-      this._handleImageClick({ name: this._name, link: this._link });
+      this._handleImageClick({ name: this.name, link: this.link });
     });
   }
+
   getNewCard() {
     this._cardElement = this._getTemplate();
+    this._cardElement.dataset.id = this._id;
     this._cardTitle = this._cardElement.querySelector(".card__title");
     this._likeButton = this._cardElement.querySelector(".card__like-button");
     this._cardImage = this._cardElement.querySelector(".card__image");

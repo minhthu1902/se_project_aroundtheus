@@ -128,10 +128,10 @@ export default class Api {
         });
     }
 
-    async cardLike(id) {
+    async cardLikeStatus(id, like) {
         return (fetch( this._baseUrl + `/cards/${id}/likes`,
             {
-              method: "PUT",
+              method: like ? "PUT": "DELETE",
               headers: {
                 authorization: this._headers.authorization,
                 "Content-Type": "application/json",              
@@ -148,25 +148,25 @@ export default class Api {
           );
     }
 
-    async cardUnlike(id) {
-        return (fetch
-          (this._baseUrl + `/cards/${id}/likes`,
-            {
-              method: "DELETE",
-              headers: {
-                authorization: this._headers.authorization,
-                "Content-Type": "application/json",
-              },
-            })
-            .then((res) => {
-              if (res.ok) 
-                return res.json();
-              return Promise.reject(`Error: ${res.status}`);
-            })
-            .catch((err) => {
-              console.error("DELETE Unlike Error: ", err);
-            })
-          );
-    }
+    // async cardUnlike(id) {
+    //     return (fetch
+    //       (this._baseUrl + `/cards/${id}/likes`,
+    //         {
+    //           method: "DELETE",
+    //           headers: {
+    //             authorization: this._headers.authorization,
+    //             "Content-Type": "application/json",
+    //           },
+    //         })
+    //         .then((res) => {
+    //           if (res.ok) 
+    //             return res.json();
+    //           return Promise.reject(`Error: ${res.status}`);
+    //         })
+    //         .catch((err) => {
+    //           console.error("DELETE Unlike Error: ", err);
+    //         })
+    //       );
+    // }
             
 }
