@@ -84,7 +84,7 @@ const previewImageModal = new PopupWithImage({
   modalSelector:"#preview-image-modal",});
 previewImageModal.setEventListeners();
 
-const deleteSubmitConfirmModal = new PopupWithConfirmation("#avatar-modal", handleCardDeleteSubmit);
+const deleteSubmitConfirmModal = new PopupWithConfirmation("#delete-modal", handleCardDeleteSubmit);
 deleteSubmitConfirmModal.setEventListeners();
 
 
@@ -134,14 +134,13 @@ avatarPictureButton.addEventListener("click", () => {
 /* ----------------------- */
 
 
-function handleProfileEditSubmit({name, description}) {
-  //name and description have to match the name of profile edit form input name
+function handleProfileEditSubmit({name, description}) {//name and description have to match the name of profile edit form input name
   editProfileModal.setLoading(true, "Saving...");
   api.patchProfile(name, description).then((userData) => {
     console.log(userData);
     profileUserInfo.setUserInfo(userData.name, userData.about);
     editProfileModal.close();
-  }).finally(() =>{ 
+  }).finally(() => { 
     editProfileModal.setLoading(false);
   })
   .catch((err)=> {
@@ -171,7 +170,6 @@ function handleAddCardFormSubmit({name, url}) {
 //   return cardElement.getNewCard();
 // }
 
-
 // const getCard = () => {
 //   const cardElement = new Card({
 //     handleDeleteClick: (cardElement ) => {
@@ -189,11 +187,10 @@ function getCard(items) {
     "#card-template",
     handleImagePreview,
     handleDeleteClick,
-    handleLikeClick,
+    // handleLikeClick,
   );
-  const card = cardElement._renderCard();
-  
-  return cardElement.getNewCard(card);
+
+  return cardElement.getNewCard();
 }
 function handleDeleteClick(items){
   console.log(items);
@@ -201,7 +198,9 @@ function handleDeleteClick(items){
 }
 
 
-function handleLikeClick(items, isLiked, card, ) {}
+// function handleLikeClick(items, isLiked, card, ) {
+
+// }
 
 
 function handleAvatarSubmit({ avatarUrl }){
@@ -224,13 +223,13 @@ function handleImagePreview(cardData) {
 } // it needs name and link to display image on preview
 
 //create a function that handle delete button modal
-function handleCardDeleteSubmit(card){
-  deleteSubmitConfirmModal.open();
+function handleCardDeleteSubmit(cardData){
+  // deleteSubmitConfirmModal.open();
   deleteSubmitConfirmModal.setSubmit(()=> {
     deleteSubmitConfirmModal.setLoading(true, "Deleting...");
-    api.deleteCard(card._id).then(() => {
+    api.deleteCard(cardData._id).then(() => {
       console.log("Card deleted successfully");
-      card.handleDeleteCard();
+      cardData.handleDeleteClick();
       deleteSubmitConfirmModal.close();
     }). catch((err) => {
       console.error(err);
