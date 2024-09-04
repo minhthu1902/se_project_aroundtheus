@@ -52,9 +52,9 @@ export default class Card {
     this._likeButton.addEventListener("click", () => {
       this._handleLikeIcon();
     });
-    this._trashButton.addEventListener("click", () => {
-      this.handleDeleteCard();
-    });
+    // this._trashButton.addEventListener("click", () => {
+    //   this.handleDeleteCard(); //this won't work because it's not a method of the Card class and delete the card before the confirmation modal is shown
+    // });
     this._trashButton.addEventListener("click", () => {
       this._handleDeleteClick(this);
     }) 
