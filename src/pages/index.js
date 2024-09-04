@@ -186,21 +186,21 @@ function getCard(items) {
     items,
     "#card-template",
     handleImagePreview,
-    handleDeleteClick,
     handleCardDeleteSubmit,
+    handleLikeClick
   );
 
   return cardElement.getNewCard();
 }
+
 function handleDeleteClick(items){
   console.log(items);
   deleteSubmitConfirmModal.open(items);
 }
 
-
-// function handleLikeClick(items, isLiked, card, ) {
-
-// }
+function handleLikeClick(card) {
+  
+}
 
 
 function handleAvatarSubmit({ avatarUrl }){
@@ -218,18 +218,19 @@ function handleAvatarSubmit({ avatarUrl }){
   })
 }
 
-function handleImagePreview(cardElement) {
-  previewImageModal.open(cardElement.name, cardElement.link);
+function handleImagePreview(card) {
+  previewImageModal.open(card.name, card.link);
 } // it needs name and link to display image on preview
 
 //create a function that handle delete button modal
-function handleCardDeleteSubmit(cardElement){
+function handleCardDeleteSubmit(items){
   deleteSubmitConfirmModal.open();
   deleteSubmitConfirmModal.setSubmit(()=> {
     deleteSubmitConfirmModal.setLoading(true, "Deleting...");
-    api.deleteCard(cardElement._id).then(() => {
+    this._cardElement.dataset.id = this._id;
+    api.deleteCard(items._id).then(() => {
       console.log("Card deleted successfully");
-      cardElement.handleDeleteCard();
+      items.handleDeleteCard();
       deleteSubmitConfirmModal.close();
     }). catch((err) => {
       console.error(err);
