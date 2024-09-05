@@ -98,8 +98,6 @@ const avatarFormValidator = new FormValidator(avatarEditForm, options);
 
 const profileEditModalFormValidator = new FormValidator(editProfileForm, options); 
 
-// const deleteButtonSubmitValidator = new FormValidator("#delete-modal-form",options);
-
 //Initialization
 profileEditModalFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
