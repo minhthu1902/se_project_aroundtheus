@@ -181,10 +181,6 @@ function getCard(items) {
   return cardElement.getNewCard();
 }
 
-// function handleDeleteClick(items){
-//   console.log(items);
-//   deleteSubmitConfirmModal.open(items);
-// }
 
 function handleLikeClick(items) {
   console.log(items);
@@ -193,8 +189,6 @@ function handleLikeClick(items) {
   }).catch((err) => {
     console.log("Failed to update card likes status", err);
   });
-
-
 }
 function handleAvatarSubmit({ avatarUrl }){
   console.log(avatarUrl);
