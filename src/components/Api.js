@@ -131,7 +131,7 @@ export default class Api {
     async cardLikeStatus(cardID, isLiked) {
         return (fetch( this._baseUrl + `/cards/${cardID}/likes`,
             {
-              method: isLiked ? "PUT": "DELETE",
+              method: isLiked ? "DELETE" : "PUT",
               headers: {
                 authorization: this._headers.authorization,
                 "Content-Type": "application/json",              

@@ -168,16 +168,6 @@ function handleAddCardFormSubmit({name, url}) {
 //   return cardElement.getNewCard();
 // }
 
-// const getCard = () => {
-//   const cardElement = new Card({
-//     handleDeleteClick: (cardElement ) => {
-//       api.deleteCard(cardElement.getId()).then(() => {cardElement.deleteCard()}).catch((err)=> {
-//         console.error(err);
-//       })
-//     }  
-//   });
-//   return cardElement.getNewCard();
-// }
  
 function getCard(items) {
   const cardElement = new Card(
@@ -206,8 +196,6 @@ function handleLikeClick(items) {
 
 
 }
-
-
 function handleAvatarSubmit({ avatarUrl }){
   console.log(avatarUrl);
   editAvatarPopup.setLoading(true, "Saving...");
