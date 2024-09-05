@@ -193,13 +193,20 @@ function getCard(items) {
   return cardElement.getNewCard();
 }
 
-function handleDeleteClick(items){
-  console.log(items);
-  deleteSubmitConfirmModal.open(items);
-}
+// function handleDeleteClick(items){
+//   console.log(items);
+//   deleteSubmitConfirmModal.open(items);
+// }
 
-function handleLikeClick(card) {
-  
+function handleLikeClick(items) {
+  console.log(items);
+  api.cardLikeStatus(items._id, items.isLiked).then((newCardData) => {
+    items.updateLikes(newCardData.isLiked);
+  }).catch((err) => {
+    console.log("Failed to update card likes status", err);
+  });
+
+
 }
 
 

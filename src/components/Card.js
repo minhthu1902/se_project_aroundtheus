@@ -10,15 +10,14 @@ export default class Card {
     this._link = link;
     this._id = _id
      // getting id
-    this.isLiked = isLiked;
+    this._isLiked = isLiked;
     this._handleImagePreview = handleImagePreview;
     this._cardSelector = cardSelector;
     this._handleDeleteClick = handleDeleteClick;
-    this.handleLikeClick = handleLikeClick;
+    this._handleLikeClick = handleLikeClick;
   }
 
   getId(){
- 
     return this._id;
   }
 
@@ -28,10 +27,11 @@ export default class Card {
       .content.querySelector(".card")
       .cloneNode(true);
   }
-  // _setCardLike(isLiked){
-  //   this._isLiked = isLiked;
-  //   this._handleLikeIcon();
-  // }
+
+  updateLikes(){
+    this._isLiked = isLiked;
+    this._handleLikeIcon();
+  }
 
   _handleLikeIcon() {
     this._handleLikeClick(this); //passing api function from index file
