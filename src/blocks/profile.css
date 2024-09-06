@@ -16,15 +16,18 @@
 }
 .profile__image-edit-button{
   background-color: black;
-  /* opacity: 0; */
   height: 120px;
   width: 120px;
   border-radius: 50%;
   border: none;
+  background-image: url(../images/Edit_button.svg) center no-repeat;
+  z-index: 1;
+
 }
 .profile__image-edit-button:hover {
-  opacity: 0.5s;
+  opacity: 0.5;
   cursor: pointer;
+  visibility: visible;
 }
 .profile__info {
   margin-left: 20px;
