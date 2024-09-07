@@ -8,7 +8,12 @@
       name="viewport"
     />
     <title>Around the US</title>
-    <!-- <link href="./src/pages/index.css" rel="stylesheet" /> -->
+    <meta name ="description" content="Around the US is a platform for sharing places and experiences from around the world."/>
+    <meta name ="keywords" 
+        content="around the us, places, experiences, travel, explore" />
+    
+    <meta name = "author" content="Thu Thai"/>
+    <link rel="stylesheet" href="./favicon.ico"/>
   </head> 
   <body class="page">
     <div class="page__content">
@@ -21,20 +26,22 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <button class="profile__image-edit-button">
-            <img
-            src="<%=require('./images/jacques-cousteau-1.jpg')%>"
-            alt="Avatar"
-            class="profile__image"/>
-          </button>
+          <div class="profile__image-container">
+            <button class="profile__image-edit-button">
+              <img
+              src="<%=require('./images/Edit_button.svg')%>"
+              alt="Avatar"
+              class="profile__image"/>
+            </button>
+          </div>
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title"></h1>
             <button
               class="profile__edit-button"
               id="profile-edit-button"
               type="button"
             ></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description"></p>
           </div>
           <button
             class="profile__add-button"
