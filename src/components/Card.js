@@ -32,7 +32,7 @@ export default class Card {
   }
 
   _handleLikeIcon() {
-    this._handleLikeClick(this); //passing api function from index file
+    // this._handleLikeClick(this); //passing api function from index file
     this._likeButton.classList.toggle("card__like-button-active");
     
   }
