@@ -127,46 +127,67 @@ export default class Api {
           console.log(result);
         });
     }
-
     async cardLikeStatus(cardID, isLiked) {
-        return (fetch( this._baseUrl + `/cards/${cardID}/likes`,
-            {
-              method: isLiked ? "DELETE" : "PUT",
-              headers: {
-                authorization: this._headers.authorization,
-                "Content-Type": "application/json",              
-              },
-            })
-            .then((res) => {
-              if (res.ok) 
-                return res.json();
-              return Promise.reject(`Like Error:  + ${res.status}`);
-            })
-            .catch((err) => {
-              console.error("PUT Like Error:", err);
-            })
-          );
+      try {
+        const res = await fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
+          method: isLiked ? "DELETE" : "PUT",
+          headers: {
+            authorization: this._headers.authorization,
+            "Content-Type": "application/json",
+          },
+        });
+  
+        if (!res.ok) {
+          throw new Error(`HTTP Error: ${res.status}`);
+        }
+  
+        return res.json();
+      } catch (err) {
+        console.error(`Failed to update like status: ${err.message}`);
+        throw err;  // Rethrow to handle in the caller function
+      }
     }
+  
 
-    // async cardUnlike(id) {
-    //     return (fetch
-    //       (this._baseUrl + `/cards/${id}/likes`,
+    // async cardLikeStatus(cardID, isLiked) {
+    //     return (fetch( this._baseUrl + `/cards/${cardID}/likes`,
     //         {
-    //           method: "DELETE",
+    //           method: isLiked ?"DELETE" : "PUT",
     //           headers: {
     //             authorization: this._headers.authorization,
-    //             "Content-Type": "application/json",
+    //             "Content-Type": "application/json",              
     //           },
     //         })
     //         .then((res) => {
     //           if (res.ok) 
     //             return res.json();
-    //           return Promise.reject(`Error: ${res.status}`);
+    //           return Promise.reject(`Like Error:  + ${res.status}`);
     //         })
     //         .catch((err) => {
-    //           console.error("DELETE Unlike Error: ", err);
+    //           console.error("PUT Like Error:", err);
     //         })
     //       );
     // }
+
+  //     async cardUnlikeStatus(cardId) {
+  //         return (fetch
+  //           (this._baseUrl + `/cards/${cardId}/likes`,
+  //             {
+  //               method: "DELETE",
+  //               headers: {
+  //                 authorization: this._headers.authorization,
+  //                 "Content-Type": "application/json",
+  //               },
+  //             })
+  //             .then((res) => {
+  //               if (res.ok) 
+  //                 return res.json();
+  //               return Promise.reject(`Error: ${res.status}`);
+  //             })
+  //             .catch((err) => {
+  //               console.error("DELETE Unlike Error: ", err);
+  //             })
+  //           );
+  //     }
             
 }

@@ -3,8 +3,6 @@ export default class Card {
   handleImagePreview,
   handleDeleteClick,
   handleLikeClick,
-
-
   ) {
     this._name = name;
     this._link = link;
@@ -28,7 +26,7 @@ export default class Card {
       .cloneNode(true);
   }
 
-  updateLikes(){
+  updateLikes(isLiked){
     this._isLiked = isLiked;
     this._handleLikeIcon();
   }
@@ -75,7 +73,6 @@ export default class Card {
     this._trashButton = this._cardElement.querySelector(".card__delete-button");
     this._renderCard();
     this._setEventListeners();
-
     return this._cardElement;
   }
 }

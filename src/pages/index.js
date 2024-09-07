@@ -183,13 +183,38 @@ function getCard(items) {
 
 
 function handleLikeClick(items) {
-  console.log(items);
-  api.cardLikeStatus(items._id, items.isLiked).then((newCardData) => {
-    items.updateLikes(newCardData.isLiked);
+  //toggle the like status
+  const isLiked = !items.isLiked;
+  items.updateLikes(isLiked); //ensure to call updateLikes
+  api.cardLikeStatus(items._id,isLiked).then((res) => {
+    if (!res.ok) {
+      throw new Error(`HTTP Error: ${res.status}`);
+    }
+    
   }).catch((err) => {
-    console.log("Failed to update card likes status", err);
+    console.error("Failed to update card likes status", err);
+    items.updateLikes(!isLiked); //revert the like status if failed to update api
   });
 }
+
+// function handleLikeClick(items) {
+//   const isLiked = !items.isLiked;
+//   if (isLiked === true) {
+//     api.cardLikeStatus(items._id, isLiked).then(() => {
+//       items.updateLikes(true);
+//     }).catch((err) => {
+//       console.error(res);
+//     });
+//   } else {
+//     api.cardUnlikeStatus(items._id).then(() => {
+//       items.updateLikes(false); 
+//   }).catch((err) => {
+//     console.error(err);
+//   });
+//   console.log(items);
+//   }
+// }
+
 function handleAvatarSubmit({ avatarUrl }){
   console.log(avatarUrl);
   editAvatarPopup.setLoading(true, "Saving...");
