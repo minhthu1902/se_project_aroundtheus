@@ -20,8 +20,7 @@
   width: 120px;
   border-radius: 50%;
   border: none;
-  background-image: url(../images/Edit_button.svg) center no-repeat;
-  z-index: 1;
+  /* transition: opacity 0.5s linear; */
 
 }
 .profile__image-edit-button:hover {
