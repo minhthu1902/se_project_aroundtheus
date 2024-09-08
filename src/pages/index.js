@@ -185,10 +185,11 @@ function getCard(items) {
 function handleLikeClick(items) {
   //toggle the like status
   const newIsLiked = !items._isLiked;
-  items.updateLikes(newIsLiked); //ensure to call updateLikes
-  api.cardLikeStatus(items._id,newIsLiked).catch((err) => {
+  api.cardLikeStatus(items._id,newIsLiked).then(() => {
+    items.updateLikes(isLiked);
+  }).catch((err) => {
     console.error("Failed to update card likes status", err);
-    items.updateLikes(!newIsLiked); //revert the like status if failed to update api
+    items.updateLikes(isLiked); //revert the like status if failed to update api
   });
 }
 

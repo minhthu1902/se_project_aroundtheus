@@ -5,8 +5,14 @@
   margin-top: 40px;
   /* max-height: 120px; */
 }
-
+.profile__image-container {
+  /* opacity: 0; */
+  position: relative;
+  transition: 0.5s ease-in-out;
+}
 .profile__image {
+
+  color: white;
   height: 120px;
   width: 120px;
   border-radius: 50%;
@@ -15,15 +21,15 @@
   margin-right: 24px;
 }
 .profile__image-edit-button{
+  background: transparent url(../images/Edit_button.svg) center no-repeat;
   background-color: black;
   height: 120px;
   width: 120px;
   border-radius: 50%;
   border: none;
   /* transition: opacity 0.5s linear; */
-
 }
-.profile__image-edit-button:hover {
+.profile__image-edit-button:hover .profile__image {
   opacity: 0.5;
   cursor: pointer;
   visibility: visible;
