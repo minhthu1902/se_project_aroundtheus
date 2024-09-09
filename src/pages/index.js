@@ -182,10 +182,9 @@ function getCard(items) {
 }
 
 
-function handleLikeClick(items) {
+function handleLikeClick(items, isLiked) {
   //toggle the like status
-  const newIsLiked = !items._isLiked;
-  api.cardLikeStatus(items._id,newIsLiked).then(() => {
+  api.cardLikeStatus(items._id,isLiked).then(() => {
     items.updateLikes(isLiked);
   }).catch((err) => {
     console.error("Failed to update card likes status", err);
