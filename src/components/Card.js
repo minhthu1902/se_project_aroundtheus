@@ -27,14 +27,17 @@ export default class Card {
   }
 
   updateLikes(isLiked){
-    this._isLiked = isLiked;
+    this._isLiked = !isLiked;
     this._handleLikeIcon();
   }
 
   _handleLikeIcon() {
     // this._handleLikeClick(this); //passing api function from index file, this will make more requests than expected.
-    this._likeButton.classList.toggle("card__like-button-active");
-    
+    if(this._isLiked){
+      this._likeButton.classList.add("card__like-button-active");
+    } else {
+      this._likeButton.classList.remove("card__like-button-active");
+    }
   }
 
   handleDeleteCard() {
@@ -68,8 +71,10 @@ export default class Card {
   getNewCard() {
     this._cardElement = this._getTemplate();
     this._cardElement.dataset.id = this._id;
+    this._cardElement.dataset.id = this._id;
     this._cardTitle = this._cardElement.querySelector(".card__title");
     this._likeButton = this._cardElement.querySelector(".card__like-button");
+    this._handleLikeIcon();
     this._cardImage = this._cardElement.querySelector(".card__image");
     this._trashButton = this._cardElement.querySelector(".card__delete-button");
     this._renderCard();

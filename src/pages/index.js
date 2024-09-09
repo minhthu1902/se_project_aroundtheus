@@ -182,13 +182,13 @@ function getCard(items) {
 }
 
 
-function handleLikeClick(items, isLiked) {
+function handleLikeClick(items) {
   //toggle the like status
-  api.cardLikeStatus(items._id,isLiked).then(() => {
-    items.updateLikes(isLiked);
+  api.cardLikeStatus(items._id,items._isLiked).then(() => {
+    items.updateLikes(items._isLiked);
   }).catch((err) => {
     console.error("Failed to update card likes status", err);
-    items.updateLikes(isLiked); //revert the like status if failed to update api
+    items.updateLikes(items._isLiked); //revert the like status if failed to update api
   });
 }
 
