@@ -32,7 +32,7 @@ export default class Card {
   }
 
   _handleLikeIcon() {
-    // this._handleLikeClick(this); //passing api function from index file
+    this._handleLikeClick(this); //passing api function from index file
     this._likeButton.classList.toggle("card__like-button-active");
     
   }
@@ -51,7 +51,8 @@ export default class Card {
 
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => {
-      this._handleLikeIcon();
+      // this._handleLikeIcon();
+      this._handleLikeClick();
     });
     // this._trashButton.addEventListener("click", () => {
     //   this.handleDeleteCard(); //this won't work because it's not a method of the Card class and delete the card before the confirmation modal is shown
