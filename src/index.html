@@ -80,7 +80,7 @@
               id="profile-title-input"
               placeholder="Name"
             />
-            <span class="modal__error" id="profile-title-input-error"></span>
+            <span class="modal__error" id="profile-title-input-error">Minimum 2 characters</span>
           </label>
           <label class="modal__label">
             <input
@@ -96,7 +96,7 @@
             <span
               class="modal__error"
               id="profile-description-input-error"
-            ></span>
+            > Minimum 2 characters</span>
           </label>
           <button class="modal__button" type="submit">Save</button>
         </form>
@@ -123,7 +123,7 @@
               id="card-title-input"
               placeholder="Title"
             />
-            <span class="modal__error" id="card-title-input-error"></span>
+            <span class="modal__error" id="card-title-input-error">Minimum 2 characters</span>
           </label>
           <label class="modal__label">
             <input
@@ -134,7 +134,7 @@
               id="card-url-input"
               placeholder="Image URL"
             />
-            <span class="modal__error" id="card-url-input-error"></span>
+            <span class="modal__error" id="card-url-input-error">Please enter an url link</span>
           </label>
           <button
             class="modal__button modal__button_disabled"
@@ -182,7 +182,7 @@
     </div>
     <!--Edit avatar-->
     <div class="modal" id ="avatar-modal">
-      <div class="modal__content">
+      <div class="modal__content" id="modal__content-avatar">
         <button class="modal__close" type="button"></button>
         <h2 class="modal__heading">Change profile picture</h2>
           <form class="modal__form"
@@ -195,7 +195,7 @@
                   placeholder="Image URL"
                   required
             />
-            <span class="modal__input-error" id="avatar-url-input-error"></span>
+            <span class="modal__input-error" id="avatar-url-input-error">Please input an URL</span>
             <button class="modal__button" type="submit">Save</button>
             </form>
         </div>
