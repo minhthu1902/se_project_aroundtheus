@@ -4,7 +4,7 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import "./index.css";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
-import userInfo from "../components/userInfo.js";
+import UserInfo from "../components/userInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
@@ -29,7 +29,6 @@ import {
   profileDescriptionInput,
 } from "../utils/constants.js";
 
-
 /*-----------------*/
 /*       Api      */
 /*---------------*/
@@ -40,31 +39,41 @@ const api = new Api({
   },
 });
 
-
-api.getInitialCards().then((cards) => {
-  cardSection.renderItems(cards);
+api
+  .getInitialCards()
+  .then((cards) => {
+    cardSection.renderItems(cards);
   })
-  .catch((err) => {console.error("Error fetching cards:", err);
-});
+  .catch((err) => {
+    console.error("Error fetching cards:", err);
+  });
 
-api.getProfile().then((data) => {
-  console.log('Profile data fetched:', data);
-  profileUserInfo.setUserInfo(data.name, data.about);
-  profileUserInfo.setUserAvatar(data.avatar);
-})
-.catch((err) => console.error('Error fetching profile:', err));
+api
+  .getProfile()
+  .then((data) => {
+    console.log("Profile data fetched:", data);
+    profileUserInfo.setUserInfo(data.name, data.about);
+    profileUserInfo.setUserAvatar(data.avatar);
+  })
+  .catch((err) => console.error("Error fetching profile:", err));
 
 //pop up with form
-const profileUserInfo = new userInfo({
+const profileUserInfo = new UserInfo({
   profileTitleSelector: ".profile__title",
   profileDescriptionSelector: ".profile__description",
-  profileAvatarSelector: ".profile__image"
+  profileAvatarSelector: ".profile__image",
 });
 
-const addCardModal = new PopupWithForm( "#add-card-modal", handleAddCardFormSubmit);
+const addCardModal = new PopupWithForm(
+  "#add-card-modal",
+  handleAddCardFormSubmit
+);
 addCardModal.setEventListeners();
 
-const editProfileModal = new PopupWithForm("#profile-edit-modal", handleProfileEditSubmit);
+const editProfileModal = new PopupWithForm(
+  "#profile-edit-modal",
+  handleProfileEditSubmit
+);
 editProfileModal.setEventListeners();
 
 const createCard = (items) => {
@@ -81,12 +90,15 @@ const editAvatarPopup = new PopupWithForm("#avatar-modal", handleAvatarSubmit);
 editAvatarPopup.setEventListeners();
 
 const previewImageModal = new PopupWithImage({
-  modalSelector:"#preview-image-modal",});
+  modalSelector: "#preview-image-modal",
+});
 previewImageModal.setEventListeners();
 
-const deleteSubmitConfirmModal = new PopupWithConfirmation("#delete-modal", handleCardDeleteSubmit);
+const deleteSubmitConfirmModal = new PopupWithConfirmation(
+  "#delete-modal",
+  handleCardDeleteSubmit
+);
 deleteSubmitConfirmModal.setEventListeners();
-
 
 /* ------------------- */
 /*     Validation     */
@@ -96,7 +108,10 @@ const addCardFormValidator = new FormValidator(addCardEditForm, options);
 
 const avatarFormValidator = new FormValidator(avatarEditForm, options);
 
-const profileEditModalFormValidator = new FormValidator(editProfileForm, options); 
+const profileEditModalFormValidator = new FormValidator(
+  editProfileForm,
+  options
+);
 
 //Initialization
 profileEditModalFormValidator.enableValidation();
@@ -126,41 +141,45 @@ avatarPictureButton.addEventListener("click", () => {
   avatarFormValidator.toggleButtonState();
 });
 
-
 /* ----------------------- */
 /*     function            */
 /* ----------------------- */
 
-
-function handleProfileEditSubmit({name, description}) {//name and description have to match the name of profile edit form input name
+function handleProfileEditSubmit({ name, description }) {
+  //name and description have to match the name of profile edit form input name
   editProfileModal.setLoading(true, "Saving...");
-  api.patchProfile(name, description).then((userData) => {
-    console.log(userData);
-    profileUserInfo.setUserInfo(userData.name, userData.about);
-    editProfileModal.close();
-  }).finally(() => { 
-    editProfileModal.setLoading(false);
-  })
-  .catch((err)=> {
-    console.error(err);
-  })
+  api
+    .patchProfile(name, description)
+    .then((userData) => {
+      console.log(userData);
+      profileUserInfo.setUserInfo(userData.name, userData.about);
+      editProfileModal.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      editProfileModal.setLoading(false);
+    }); // finally should go after catch
 }
 
-function handleAddCardFormSubmit({name, url}) {
-  addCardModal.setLoading(true,"Saving...");
-  api.postCards(name, url).then((cardData) => {
-    // console.log(cardData);
-    const card = getCard(cardData);
-    // addCardFormValidator.toggleButtonState();
-    cardSection.addItem(card);
-    addCardModal.close();
-
-  }).finally(() => {
-    addCardModal.setLoading(false);
-  }).catch((err) => {
-    console.error(err);
-  })
-
+function handleAddCardFormSubmit({ name, url }) {
+  addCardModal.setLoading(true, "Saving...");
+  api
+    .postCards(name, url)
+    .then((cardData) => {
+      // console.log(cardData);
+      const card = getCard(cardData);
+      // addCardFormValidator.toggleButtonState();
+      cardSection.addItem(card);
+      addCardModal.close();
+    })
+    .finally(() => {
+      addCardModal.setLoading(false);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 // function getCard (cardData) {
@@ -168,7 +187,6 @@ function handleAddCardFormSubmit({name, url}) {
 //   return cardElement.getNewCard();
 // }
 
- 
 function getCard(items) {
   const cardElement = new Card(
     items,
@@ -181,48 +199,33 @@ function getCard(items) {
   return cardElement.getNewCard();
 }
 
-
 function handleLikeClick(items) {
   //toggle the like status
-  api.cardLikeStatus(items._id,items._isLiked).then(() => {
-    items.updateLikes(items._isLiked);
-  }).catch((err) => {
-    console.error("Failed to update card likes status", err);
-    items.updateLikes(items._isLiked); //revert the like status if failed to update api
-  });
+  api
+    .likeCardStatus(items._id, items.isLiked)
+    .then(() => {
+      items.updateLikes(items.isLiked);
+    })
+    .catch((err) => {
+      console.error("Failed to update card likes status", err);
+    });
 }
 
-// function handleLikeClick(items) {
-//   const isLiked = !items.isLiked;
-//   if (isLiked === true) {
-//     api.cardLikeStatus(items._id, isLiked).then(() => {
-//       items.updateLikes(true);
-//     }).catch((err) => {
-//       console.error(res);
-//     });
-//   } else {
-//     api.cardUnlikeStatus(items._id).then(() => {
-//       items.updateLikes(false); 
-//   }).catch((err) => {
-//     console.error(err);
-//   });
-//   console.log(items);
-//   }
-// }
-
-function handleAvatarSubmit({ avatarUrl }){
+function handleAvatarSubmit({ avatarUrl }) {
   console.log(avatarUrl);
   editAvatarPopup.setLoading(true, "Saving...");
-  api.patchProfileAvatar(avatarUrl)
-  .then((data) => {
-    profileUserInfo.setUserAvatar(data.avatar);
-    editAvatarPopup.close();
-  })
-  .finally(()=>{
-    editAvatarPopup.setLoading(false);
-  }).catch((err)=> {
-    console.error(err);
-  })
+  api
+    .patchProfileAvatar(avatarUrl)
+    .then((data) => {
+      profileUserInfo.setUserAvatar(data.avatar);
+      editAvatarPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      editAvatarPopup.setLoading(false);
+    });
 }
 
 function handleImagePreview(card) {
@@ -230,20 +233,23 @@ function handleImagePreview(card) {
 } // it needs name and link to display image on preview
 
 //create a function that handle delete button modal
-function handleCardDeleteSubmit(items){
+function handleCardDeleteSubmit(items) {
   deleteSubmitConfirmModal.open();
-  deleteSubmitConfirmModal.setSubmit(()=> {
+  deleteSubmitConfirmModal.setSubmit(() => {
     deleteSubmitConfirmModal.setLoading(true, "Deleting...");
-    this._cardElement.dataset.id = this._id;
-    api.deleteCard(items._id).then(() => {
-      console.log("Card deleted successfully");
-      items.handleDeleteCard();
-      deleteSubmitConfirmModal.close();
-    }). catch((err) => {
-      console.error(err);
-    }).finally(() => {
-      deleteSubmitConfirmModal.setLoading(false, "Yes");
-    });
+    // this._cardElement.dataset.id = this._id;
+    api
+      .deleteCard(items._id)
+      .then(() => {
+        console.log("Card deleted successfully");
+        items.handleDeleteCard();
+        deleteSubmitConfirmModal.close();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        deleteSubmitConfirmModal.setLoading(false, "Yes");
+      });
   });
 }
-

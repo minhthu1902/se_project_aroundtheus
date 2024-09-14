@@ -1,4 +1,4 @@
-export default class userInfo {
+export default class UserInfo {
   //pass in selector's as argument
   constructor({ 
     profileTitleSelector, profileDescriptionSelector,

@@ -7,8 +7,7 @@ export default class Card {
     this._name = name;
     this._link = link;
     this._id = _id
-     // getting id
-    this._isLiked = isLiked;
+    this.isLiked = isLiked;
     this._handleImagePreview = handleImagePreview;
     this._cardSelector = cardSelector;
     this._handleDeleteClick = handleDeleteClick;
@@ -27,13 +26,13 @@ export default class Card {
   }
 
   updateLikes(isLiked){
-    this._isLiked = !isLiked;
+    this.isLiked = !isLiked;
     this._handleLikeIcon();
   }
 
   _handleLikeIcon() {
     // this._handleLikeClick(this); //passing api function from index file, this will make more requests than expected.
-    if(this._isLiked){
+    if(this.isLiked){
       this._likeButton.classList.add("card__like-button-active");
     } else {
       this._likeButton.classList.remove("card__like-button-active");
