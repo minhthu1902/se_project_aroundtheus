@@ -3,72 +3,47 @@ export default class Api {
     this._baseUrl = baseUrl;
     this._headers = headers;
   }
+
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
+  }
+
   //profile and avatar
   async getProfile() {
     return fetch(this._baseUrl + "/users/me/", {
       method: "GET",
-      headers: {
-        authorization: this._headers.authorization,
-      },
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        console.log("Error");
-        return Promise.reject(`Error : ${res.status}`);
-      })
-      .then((result) => {
-        console.log(result);
-        return result;
-      });
-    // .catch((err) => console.error(err));
+      headers: this._headers,
+    }).then(this._checkResponse);
   }
 
   async patchProfileAvatar(newLink) {
     return fetch(this._baseUrl + "/users/me/avatar", {
       method: "PATCH",
       headers: {
-        authorization: this._headers.authorization,
+        ...this._headers,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         avatar: newLink,
       }),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status} + ${res.message}`);
-      })
-      .then((result) => {
-        return result;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then(this._checkResponse);
   }
   //update profile info
   async patchProfile(nameVar, bioVar) {
     return fetch(this._baseUrl + "/users/me", {
       method: "PATCH",
       headers: {
-        authorization: this._headers.authorization,
+        ...this._headers,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name: nameVar,
         about: bioVar,
       }),
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }).then(this._checkResponse);
   }
   //CARD ROUTES
   // get all cards
@@ -79,10 +54,7 @@ export default class Api {
         authorization: this._headers.authorization,
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.ok) return res.json();
-      return Promise.reject(`Error getting initial cards: ${res.status}`);
-    });
+    }).then(this._checkResponse);
   }
   //create new card
   async postCards(name, link) {
@@ -90,45 +62,27 @@ export default class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
       headers: {
-        authorization: this._headers.authorization,
+        ...this._headers,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, link }),
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((result) => {
-        console.log("Card created successfully:", result);
-        return result;
-      })
-      .catch((err) => {
-        console.error("POST Card Error:", err);
-      });
+    }).then(this._checkResponse);
   }
   async deleteCard(cardID) {
     return fetch(this._baseUrl + `/cards/${cardID}`, {
       method: "DELETE",
       headers: {
-        authorization: this._headers.authorization,
+        ...this._headers,
         "Content-Type": "application/json",
       },
-    })
-      .then((res) => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((result) => {
-        console.log(result);
-      });
+    }).then(this._checkResponse);
   }
   async likeCardStatus(cardID, isLiked) {
     try {
       const res = await fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
         method: isLiked ? "DELETE" : "PUT",
         headers: {
-          authorization: this._headers.authorization,
+          ...this._headers,
           "Content-Type": "application/json",
         },
       });
