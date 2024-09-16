@@ -84,55 +84,6 @@ export default class Api {
         ...this._headers,
         "Content-Type": "application/json",
       },
-    });
-
-    //   if (!res.ok) {
-    //     throw new Error(`HTTP Error: ${res.status}`);
-    //   }
-
-    //   return res.json();
-    // } catch (err) {
-    //   console.error(`Failed to update like status: ${err.message}`);
-    //   throw err; // Rethrow to handle in the caller function
+    }).then(this._checkResponse);
   }
 }
-
-// async cardLikeStatus(cardID, isLiked) {
-//     return (fetch( this._baseUrl + `/cards/${cardID}/likes`,
-//         {
-//           method: isLiked ?"DELETE" : "PUT",
-//           headers: {
-//             authorization: this._headers.authorization,
-//             "Content-Type": "application/json",
-//           },
-//         })
-//         .then((res) => {
-//           if (res.ok)
-//             return res.json();
-//           return Promise.reject(`Like Error:  + ${res.status}`);
-//         })
-//         .catch((err) => {
-//           console.error("PUT Like Error:", err);
-//         })
-//       );
-// }
-
-//     async cardUnlikeStatus(cardId) {
-//         return (fetch
-//           (this._baseUrl + `/cards/${cardId}/likes`,
-//             {
-//               method: "DELETE",
-//               headers: {
-//                 authorization: this._headers.authorization,
-//                 "Content-Type": "application/json",
-//               },
-//             })
-//             .then((res) => {
-//               if (res.ok)
-//                 return res.json();
-//               return Promise.reject(`Error: ${res.status}`);
-//             })
-//             .catch((err) => {
-//               console.error("DELETE Unlike Error: ", err);
-//             })
-// );
