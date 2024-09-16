@@ -51,7 +51,7 @@ export default class Api {
     return fetch(this._baseUrl + "/cards", {
       method: "GET",
       headers: {
-        authorization: this._headers.authorization,
+        ...this._headers,
         "Content-Type": "application/json",
       },
     }).then(this._checkResponse);
@@ -77,65 +77,62 @@ export default class Api {
       },
     }).then(this._checkResponse);
   }
-  async likeCardStatus(cardID, isLiked) {
-    try {
-      const res = await fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
-        method: isLiked ? "DELETE" : "PUT",
-        headers: {
-          ...this._headers,
-          "Content-Type": "application/json",
-        },
-      });
+  async toggleLikeStatus(cardID, isLiked) {
+    return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
+      method: isLiked ? "DELETE" : "PUT",
+      headers: {
+        ...this._headers,
+        "Content-Type": "application/json",
+      },
+    });
 
-      if (!res.ok) {
-        throw new Error(`HTTP Error: ${res.status}`);
-      }
+    //   if (!res.ok) {
+    //     throw new Error(`HTTP Error: ${res.status}`);
+    //   }
 
-      return res.json();
-    } catch (err) {
-      console.error(`Failed to update like status: ${err.message}`);
-      throw err; // Rethrow to handle in the caller function
-    }
+    //   return res.json();
+    // } catch (err) {
+    //   console.error(`Failed to update like status: ${err.message}`);
+    //   throw err; // Rethrow to handle in the caller function
   }
-
-  // async cardLikeStatus(cardID, isLiked) {
-  //     return (fetch( this._baseUrl + `/cards/${cardID}/likes`,
-  //         {
-  //           method: isLiked ?"DELETE" : "PUT",
-  //           headers: {
-  //             authorization: this._headers.authorization,
-  //             "Content-Type": "application/json",
-  //           },
-  //         })
-  //         .then((res) => {
-  //           if (res.ok)
-  //             return res.json();
-  //           return Promise.reject(`Like Error:  + ${res.status}`);
-  //         })
-  //         .catch((err) => {
-  //           console.error("PUT Like Error:", err);
-  //         })
-  //       );
-  // }
-
-  //     async cardUnlikeStatus(cardId) {
-  //         return (fetch
-  //           (this._baseUrl + `/cards/${cardId}/likes`,
-  //             {
-  //               method: "DELETE",
-  //               headers: {
-  //                 authorization: this._headers.authorization,
-  //                 "Content-Type": "application/json",
-  //               },
-  //             })
-  //             .then((res) => {
-  //               if (res.ok)
-  //                 return res.json();
-  //               return Promise.reject(`Error: ${res.status}`);
-  //             })
-  //             .catch((err) => {
-  //               console.error("DELETE Unlike Error: ", err);
-  //             })
-  // );
-  //     }
 }
+
+// async cardLikeStatus(cardID, isLiked) {
+//     return (fetch( this._baseUrl + `/cards/${cardID}/likes`,
+//         {
+//           method: isLiked ?"DELETE" : "PUT",
+//           headers: {
+//             authorization: this._headers.authorization,
+//             "Content-Type": "application/json",
+//           },
+//         })
+//         .then((res) => {
+//           if (res.ok)
+//             return res.json();
+//           return Promise.reject(`Like Error:  + ${res.status}`);
+//         })
+//         .catch((err) => {
+//           console.error("PUT Like Error:", err);
+//         })
+//       );
+// }
+
+//     async cardUnlikeStatus(cardId) {
+//         return (fetch
+//           (this._baseUrl + `/cards/${cardId}/likes`,
+//             {
+//               method: "DELETE",
+//               headers: {
+//                 authorization: this._headers.authorization,
+//                 "Content-Type": "application/json",
+//               },
+//             })
+//             .then((res) => {
+//               if (res.ok)
+//                 return res.json();
+//               return Promise.reject(`Error: ${res.status}`);
+//             })
+//             .catch((err) => {
+//               console.error("DELETE Unlike Error: ", err);
+//             })
+// );

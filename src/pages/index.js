@@ -202,7 +202,7 @@ function getCard(items) {
 function handleLikeClick(items) {
   //toggle the like status
   api
-    .likeCardStatus(items._id, items.isLiked)
+    .toggleLikeStatus(items._id, items.isLiked)
     .then(() => {
       items.updateLikes(items.isLiked);
     })
