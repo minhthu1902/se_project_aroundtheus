@@ -29,7 +29,10 @@
   max-height: 330px;
   align-items: center;
 }
-
+#modal__content-delete-card {
+  width: 358px;
+  height: 109px;
+}
 .modal__heading {
   /* max-width: 330px; */
   max-height: 29px;
