@@ -76,13 +76,13 @@ const editProfileModal = new PopupWithForm(
 );
 editProfileModal.setEventListeners();
 
-const createCard = (items) => {
-  const newCard = getCard(items);
+const createCard = (item) => {
+  const newCard = getCard(item);
   cardSection.addItem(newCard);
 };
 
 const cardSection = new Section(
-  { items: [], renderer: createCard },
+  { item: [], renderer: createCard },
   ".cards__list"
 );
 
@@ -174,11 +174,11 @@ function handleAddCardFormSubmit({ name, url }) {
       cardSection.addItem(card);
       addCardModal.close();
     })
-    .finally(() => {
-      addCardModal.setLoading(false);
-    })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      addCardModal.setLoading(false);
     });
 }
 
@@ -187,9 +187,9 @@ function handleAddCardFormSubmit({ name, url }) {
 //   return cardElement.getNewCard();
 // }
 
-function getCard(items) {
+function getCard(item) {
   const cardElement = new Card(
-    items,
+    item,
     "#card-template",
     handleImagePreview,
     handleCardDeleteSubmit,
@@ -199,12 +199,12 @@ function getCard(items) {
   return cardElement.getNewCard();
 }
 
-function handleLikeClick(items) {
+function handleLikeClick(item) {
   //toggle the like status
   api
-    .toggleLikeStatus(items._id, items.isLiked)
+    .toggleLikeStatus(item._id, item.isLiked)
     .then(() => {
-      items.updateLikes(items.isLiked);
+      item.updateLikes(item.isLiked);
     })
     .catch((err) => {
       console.error("Failed to update card likes status", err);
@@ -233,16 +233,16 @@ function handleImagePreview(card) {
 } // it needs name and link to display image on preview
 
 //create a function that handle delete button modal
-function handleCardDeleteSubmit(items) {
+function handleCardDeleteSubmit(item) {
   deleteSubmitConfirmModal.open();
   deleteSubmitConfirmModal.setSubmit(() => {
     deleteSubmitConfirmModal.setLoading(true, "Deleting...");
     // this._cardElement.dataset.id = this._id;
     api
-      .deleteCard(items._id)
+      .deleteCard(item._id)
       .then(() => {
         console.log("Card deleted successfully");
-        items.handleDeleteCard();
+        item.handleDeleteCard();
         deleteSubmitConfirmModal.close();
       })
       .catch((err) => {

@@ -14,7 +14,7 @@ export default class FormValidator {
 
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(inputElement);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
       this._hideInputError(inputElement); //all inputlements are valid
     }
@@ -39,6 +39,7 @@ export default class FormValidator {
     errorMessageEl.textContent = ""; //reset error
     errorMessageEl.classList.remove(this._errorClass);
   }
+
   _setEventListeners() {
     this._inputElements = [
       ...this._formElement.querySelectorAll(this._inputSelector),
