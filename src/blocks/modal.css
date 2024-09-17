@@ -27,7 +27,7 @@
   padding: 36px;
   max-width: 430px;
   max-height: 330px;
-  align-items: center;
+  /* align-items: center; */
 }
 #modal__content-delete-card {
   width: 358px;
@@ -98,7 +98,7 @@
   border: none;
   border-radius: 2px;
   text-align: center;
-  /* margin: 48px 0 37px; */
+  margin: 48px 0 0px;
   padding: 0;
   align-items: center;
   justify-content: space-around;

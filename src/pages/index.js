@@ -9,10 +9,8 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import {
-  authorizationCode,
   avatarPictureButton,
   avatarEditForm,
-  initialCards,
   cardData,
   cardsListEl,
   profileEditButton,
@@ -35,7 +33,8 @@ import {
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: authorizationCode,
+    authorization: "a93eae64-e670-4bc7-86e7-6fe2158b62a7",
+    "Content-Type": "application/json",
   },
 });
 

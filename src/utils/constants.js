@@ -71,15 +71,19 @@ export const previewImageTitle = document.querySelector("#preview-title");
 export const previewImageModalCloseButton = document.querySelector(
   "#preview-modal-close-button"
 );
-export const cardTemplate = document.querySelector("#card-template").content.querySelector(".card");
+export const cardTemplate = document
+  .querySelector("#card-template")
+  .content.querySelector(".card");
 //content.firstElementChild;
 export const editProfileForm = document.querySelector("#edit-profile-form");
 
 //avatar
-export const avatarPictureButton = document.querySelector(".profile__image-edit-button");
-export const avatarEditModal= document.querySelector("#avatar-modal");
-export const avatarEditForm = avatarEditModal.querySelector("#avatar-modal-form");
-
+export const avatarPictureButton = document.querySelector(
+  ".profile__image-edit-button"
+);
+export const avatarEditModal = document.querySelector("#avatar-modal");
+export const avatarEditForm =
+  avatarEditModal.querySelector("#avatar-modal-form");
 
 /* ---------------------------------- */
 /*  Delete card confirmation form    */
@@ -96,6 +100,3 @@ export const options = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
-
-export const authorizationCode = "a93eae64-e670-4bc7-86e7-6fe2158b62a7";
-
