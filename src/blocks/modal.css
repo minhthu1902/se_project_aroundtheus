@@ -33,6 +33,7 @@
   width: 358px;
   height: 109px;
 }
+
 .modal__heading {
   /* max-width: 330px; */
   max-height: 29px;
@@ -67,11 +68,13 @@
 .modal__form {
   display: flex;
   flex-direction: column;
-  font-size: 14px;
-  /* flex-wrap: wrap;
+  /* font-size: 14px;
+  flex-wrap: wrap;
   justify-content: center; */
 }
-
+#edit-profile-form {
+  max-height: 300px;
+}
 .modal__input {
   font-family: "Inter", sans-serif;
   border: 1px solid transparent;
@@ -98,14 +101,16 @@
   border: none;
   border-radius: 2px;
   text-align: center;
-  margin: 48px 0 0px;
+  margin: 0px 0 0px;
   padding: 0;
   align-items: center;
   justify-content: space-around;
   box-sizing: border-box;
   /* width: 358px; */
 }
-
+#avatar-submit-button {
+  margin: 48px 0 0 0;
+}
 .modal__button:hover {
   opacity: 0.5;
   cursor: pointer;
