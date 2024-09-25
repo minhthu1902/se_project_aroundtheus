@@ -6,8 +6,9 @@ export default class PopupWithForm extends Popup {
     this._form = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
     this._inputList = this._form.querySelectorAll(".modal__input");
-    this.setEventListeners();
+    this._modalButton = this._popupElement.querySelector(".modal__button");
   }
+
   close() {
     this._form.reset(); // to reset the form once the popup is closed
     super.close();
@@ -26,16 +27,27 @@ export default class PopupWithForm extends Popup {
       input.value = data[input.name];
     });
   }
+  setLoading(isLoading, loadingText = "Saving...") {
+    if (this._modalButton) {
+      if (isLoading) {
+        this._modalButton.textContent = loadingText;
+      } else {
+        this._modalButton.textContent = this._modalButton.dataset.originalText || "Save";
+      }
+    } else {
+      console.error("Submit button not found.");
+    }
+  }
 
   setEventListeners() {
     this._form.addEventListener("submit", (e) => {
       e.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
+    this._handleFormSubmit(this._getInputValues());
     });
     super.setEventListeners();
   }
 
-  getNewForm() {
-    return this._form;
-  }
+  // getNewForm() {
+  //   return this._form;
+  // }
 }

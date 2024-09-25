@@ -1,5 +1,7 @@
 export default class Popup {
-  constructor({ modalSelector }) {
+  constructor({modalSelector}) {
+    // this._modalSelector = modalSelector;
+    console.log(this._popupElement);
     this._popupElement = document.querySelector(modalSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
   }
@@ -10,17 +12,20 @@ export default class Popup {
     this._popupElement.classList.add("modal_opened");
     document.addEventListener("keyup", this._handleEscClose);
   }
+
   close() {
     // console.log(this);
     this._popupElement.classList.remove("modal_opened");
     document.removeEventListener("keyup", this._handleEscClose);
   }
+
   _handleEscClose(e) {
     e.preventDefault();
     if (e.key === "Escape") {
       this.close();
     }
   }
+
   setEventListeners() {
     // add a click event listener to close icon
     this._popupElement.addEventListener("mousedown", (e) => {
@@ -33,3 +38,4 @@ export default class Popup {
     });
   }
 }
+

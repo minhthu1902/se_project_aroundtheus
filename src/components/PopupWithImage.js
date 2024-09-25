@@ -1,7 +1,7 @@
 import Popup from "./Popup";
 export default class PopupWithImage extends Popup {
-  constructor(modalSelector) {
-    super(modalSelector);
+  constructor({ modalSelector }) {
+    super({ modalSelector });
     this._photoElement = this._popupElement.querySelector(
       ".modal__preview-image"
     );

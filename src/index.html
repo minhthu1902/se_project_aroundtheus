@@ -8,8 +8,13 @@
       name="viewport"
     />
     <title>Around the US</title>
-    <!-- <link href="./src/pages/index.css" rel="stylesheet" /> -->
-  </head>
+    <meta name ="description" content="Around the US is a platform for sharing places and experiences from around the world."/>
+    <meta name ="keywords" 
+        content="around the us, places, experiences, travel, explore" />
+    
+    <meta name = "author" content="Thu Thai"/>
+    <link rel="stylesheet" />
+  </head> 
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
@@ -21,19 +26,23 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau-1.jpg')%>"
-            alt="Avatar"
-            class="profile__image"
-          />
+          <div class="profile__image-container">
+            <button class="profile__image-edit-button">
+              <img
+              src="<%=require('./images/Edit_button.svg')%>"
+              alt="Avatar"
+              class="profile__image"/>
+            </button>
+          </div>
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title"></h1>
             <button
               class="profile__edit-button"
               id="profile-edit-button"
               type="button"
             ></button>
-            <p class="profile__description">Explorer</p>
+          </button>
+            <p class="profile__description"></p>
           </div>
           <button
             class="profile__add-button"
@@ -41,7 +50,6 @@
             type="button"
           ></button>
         </section>
-
         <section class="cards page__section">
           <ul class="cards__list" id="cards-container"></ul>
         </section>
@@ -88,7 +96,7 @@
             <span
               class="modal__error"
               id="profile-description-input-error"
-            ></span>
+            > </span>
           </label>
           <button class="modal__button" type="submit">Save</button>
         </form>
@@ -148,7 +156,7 @@
         ></button>
 
         <img
-          src="#"
+          src=""
           alt="Preview Image"
           class="modal__preview-image"
           id="preview-image"
@@ -156,12 +164,49 @@
         <h2 class="modal__preview-title"></h2>
       </div>
     </div>
+
+    <!--Delete Image Modal-->
+    <div class="modal" id="delete-modal">
+      <div class="modal__content" id="modal__content-delete-card">
+        <button
+          class="modal__close"
+          id="delete-card-modal"
+          type="'button"></button>
+        <form class="modal__form modal__form_delete"
+              id="delete-modal-form" name="delete-submit-form">
+            <h2 class="modal__heading">Are you sure?</h2>
+            <button class="modal__button" type="submit">Yes</button>
+        </form>
+
+      </div>
+    </div>
+    <!--Edit avatar-->
+    <div class="modal" id ="avatar-modal">
+      <div class="modal__content" id="modal__content-avatar">
+        <button class="modal__close" type="button"></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+          <form class="modal__form"
+              id="avatar-modal-form"
+              name="edit-avatar-form">
+            <input type = "url"
+                  id = "avatar-url-input"
+                  name="avatarUrl"
+                  class="modal__input"
+                  placeholder="Image URL"
+                  required
+            />
+            <span class="modal__input-error" id="avatar-url-input-error"></span>
+            <button class="modal__button" id="avatar-submit-button" type="submit">Save</button>
+            </form>
+        </div>
+      </div>
     <!-- template card -->
     <template id="card-template">
       <!--shortcut template#card-template-->
       <li class="card">
         <img src="#" class="card__image" alt="#" />
-        <button class="card__delete-button" type="button"></button>
+        <button class="card__delete-button" type="button" id="card__remove-button">
+        </button>
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button
