@@ -1,4 +1,6 @@
-# Project 3: Around The U.S.
+# Project 3: Around The U.S. This is the front-end project. 
+Link: 
+   https://minhthu1902.github.io/se_project_aroundtheus
 
 \*\*Overview:
 Intro
@@ -9,7 +11,7 @@ Feedback
 
 **Intro**
 
-This project is made using tool such as Figma, tinypng.com and Visual Code to link to Github and create a responsive website which displays pictures of sight seeing places and corresponding size for desktop, mobile phone.
+This project is made using tool such as Figma and Visual Code to link to Github and create a responsive website which displays pictures of sight seeing places and corresponding size for desktop, mobile phone.
 
 Profile edit and add card can be used to edit username and description in form. We can add new card into the list . Like card used as function of the card.
 
@@ -34,8 +36,7 @@ The way we do this at work is by exporting images directly from Figma — we rec
 6. OOP
 7. Refactoring and destructing into instances and combine them into index.js
 
-   Link to Github:
-   https://minhthu1902.github.io/se_project_aroundtheus
+
 
 **Feedback**
 Any feedback and contributions to the code are welcomed and appreciated for any further improvement. Thank you.
